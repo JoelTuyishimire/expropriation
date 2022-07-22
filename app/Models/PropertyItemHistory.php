@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PropertyType extends Model
+class PropertyItemHistory extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function propertyItems()
+    public function propertyItem()
     {
-        return $this->hasMany(PropertyItem::class);
+        return $this->belongsTo(PropertyItem::class);
     }
 }

@@ -41,17 +41,6 @@ class PropertyTypeController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PropertyType  $propertyType
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PropertyType $propertyType)
-    {
-        dd($propertyType);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

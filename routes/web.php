@@ -53,6 +53,9 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
 
     //Property Types routes
     Route::resource('property-types', \App\Http\Controllers\PropertyTypeController::class);
+    Route::resource('property-items', \App\Http\Controllers\PropertyItemController::class);
+    //property item history routes
+    Route::get('/property-items/history/{property_item_id}', [App\Http\Controllers\PropertyItemController::class, 'showPropertyItemHistory'])->name('property-items.history');
 
 });
 
