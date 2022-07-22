@@ -23,8 +23,8 @@ class UsersTableSeeder extends Seeder
             0 =>
             array (
                 'id' => 1,
-                'name' => 'Iposita Admin',
-                'email' => 'admin@iposita.com',
+                'name' => 'System Admin',
+                'email' => 'admin@expropriation.rw',
                 'telephone' => '0786875878',
                 'is_active' => true,
                 'is_super_admin' => true,

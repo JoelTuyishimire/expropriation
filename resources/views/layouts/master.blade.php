@@ -152,7 +152,7 @@
                                         <span class="menu-text text-muted" style="font-size: 22px;">
 {{--                                            <img src="{{asset("img/log.jpg")}}" class="img-fluid rounded-pill" width="50"--}}
 {{--                                                height="30" alt="">--}}
-                                            <span style="margin-left: 5px"> Iposita E-Payment System</span> </span>
+                                            <span style="margin-left: 5px"> Expropriation System</span> </span>
                                         <i class="menu-arrow"></i>
                                     </a>
                                 </li>
@@ -215,7 +215,7 @@
                     <div class="text-dark order-2 order-md-1">
                         <span class="text-muted font-weight-bold mr-2"><?= date('Y')?></span>
                         <a href="#" target="_blank" class="text-dark-75 text-hover-primary">
-                            Iposita Fee Collection management System
+                            Expropriation System
                         </a>
                     </div>
                     <!--end::Copyright-->
