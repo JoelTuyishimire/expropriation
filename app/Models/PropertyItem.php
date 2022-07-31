@@ -9,6 +9,10 @@ class PropertyItem extends Model
 {
     use HasFactory;
 
+//    protected $casts = [
+//        'price' => doubleval();
+//    ]
+
     protected $guarded = [];
 
     public function propertyType()

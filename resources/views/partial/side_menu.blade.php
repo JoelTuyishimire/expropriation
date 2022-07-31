@@ -7,7 +7,7 @@
     </li>
     @can('Create Transaction')
         <li class="menu-item nav-transactions" aria-haspopup="true">
-            <a href="{{ route('admin.property-types.index') }}" class="menu-link">
+            <a href="{{ route('admin.expropriations.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Expropriations</span>
             </a>

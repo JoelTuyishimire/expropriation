@@ -34,8 +34,8 @@ class PropertyItemController extends Controller
         $item->name = $request->name;
         $item->name_en = $request->name_en;
         $item->property_type_id = $request->property_type_id;
-        $item->measurement_unit = $request->measurement_unit;
-        $item->unit_price = $request->unit_price;
+        $item->measurement = $request->measurement;
+        $item->price = $request->price;
         $item->location = $request->location;
         $item->description = $request->description;
         $item->save();
@@ -60,8 +60,8 @@ class PropertyItemController extends Controller
             'name_en' => $item->name_en,
             'property_type_id' => $item->property_type_id,
             'property_item_id' => $item->id,
-            'measurement_unit' => $item->measurement_unit,
-            'unit_price' => $item->unit_price,
+            'measurement' => $item->measurement,
+            'price' => $item->price,
             'location' => $item->location,
             'updated_by' => auth()->user()->id
         ]);
@@ -71,8 +71,8 @@ class PropertyItemController extends Controller
         $item->name = $request->name;
         $item->name_en = $request->name_en;
         $item->property_type_id = $request->property_type_id;
-        $item->measurement_unit = $request->measurement_unit;
-        $item->unit_price = $request->unit_price;
+        $item->measurement = $request->measurement;
+        $item->price = $request->price;
         $item->location = $request->location;
         $item->description = $request->description;
         $item->save();

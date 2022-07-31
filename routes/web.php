@@ -57,6 +57,14 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     //property item history routes
     Route::get('/property-items/history/{property_item_id}', [App\Http\Controllers\PropertyItemController::class, 'showPropertyItemHistory'])->name('property-items.history');
 
+    //Route expropriation
+    Route::resource('expropriations', \App\Http\Controllers\ExpropriationController::class);
+
 });
+
+//ajax requests
+Route::get('districts/{province}', [\App\Http\Controllers\LocalityController::class,'districtsByProvince']);
+Route::get('sectors/{district}', [\App\Http\Controllers\LocalityController::class,'sectorsByDistrict']);
+Route::get('cells/{sector}', [\App\Http\Controllers\LocalityController::class,'cellsBySector']);
 
 Auth::routes();

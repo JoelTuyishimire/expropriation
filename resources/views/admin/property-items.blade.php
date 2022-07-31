@@ -76,8 +76,8 @@
 
                                 <td>{{ optional($item->propertyType)->name ?? "-" }}</td>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->measurement_unit }}</td>
-                                <td>{{ $item->unit_price }}</td>
+                                <td>{{ $item->measurement }}</td>
+                                <td>{{ $item->price }}</td>
                                 <td>{{ $item->location }}</td>
                                 <td>{{ $item->description }}</td>
                                     <td>
@@ -93,8 +93,8 @@
                                                 <a class="dropdown-item dropdown-item-color btn-edit" href="#"
                                                    data-name="{{$item->name}}"
                                                    data-name_en="{{$item->name_en}}"
-                                                   data-measurement_unit="{{$item->measurement_unit}}"
-                                                    data-unit_price="{{$item->unit_price}}"
+                                                   data-measurement="{{$item->measurement}}"
+                                                    data-price="{{$item->price}}"
                                                     data-location="{{$item->location}}"
                                                     data-description="{{$item->description}}"
                                                     data-id="{{$item->id}}"
@@ -147,7 +147,7 @@
                                         </div>
                                         <div class="col-md-6 form-group" >
                                             <label for="name">measurement unit</label>
-                                            <select name="measurement_unit" id="measurement_unit_id" class="form-control">
+                                            <select name="measurement" id="measurement_id" class="form-control">
                                                 <option value="">Select measurement unit</option>
                                                 @foreach($measurementUnits ?? ["KG","PIECES", "NUMBER"] as $item)
                                                     {{--                                                <option value="{{$item->id}}">{{$item->name}}</option>--}}
@@ -157,7 +157,7 @@
                                         </div>
                                         <div class="col-md-6 form-group" >
                                             <label for="name">Unit price</label>
-                                            <input name="unit_price" type="text" id="unit_price" class="form-control">
+                                            <input name="price" type="text" id="price" class="form-control">
                                         </div>
                                         <div class="col-md-6 form-group" >
                                             <label for="name">Location</label>
@@ -212,7 +212,7 @@
                                         </div>
                                         <div class="col-md-6 form-group" >
                                             <label for="name">measurement unit</label>
-                                            <select name="measurement_unit" id="_measurement_unit" class="form-control">
+                                            <select name="measurement" id="_measurement" class="form-control">
                                                 <option value="">Select measurement unit</option>
                                                 @foreach($measurementUnits ?? ["KG","PIECES", "NUMBER"] as $item)
                                                     {{--                                                <option value="{{$item->id}}">{{$item->name}}</option>--}}
@@ -222,7 +222,7 @@
                                         </div>
                                         <div class="col-md-6 form-group" >
                                             <label for="name">Unit price</label>
-                                            <input name="unit_price" type="text" id="_unit_price" class="form-control">
+                                            <input name="price" type="text" id="_price" class="form-control">
                                         </div>
                                         <div class="col-md-6 form-group" >
                                             <label for="name">Location</label>
@@ -274,8 +274,8 @@
             $('#_name').val($(this).data('name'));
             $('#_name_en').val($(this).data('name_en'));
             $('#_property_type_id').val($(this).data('property_type_id'));
-            $('#_measurement_unit').val($(this).data('measurement_unit'));
-            $('#_unit_price').val($(this).data('unit_price'));
+            $('#_measurement').val($(this).data('measurement'));
+            $('#_price').val($(this).data('price'));
             $('#_location').val($(this).data('location'));
             $('#_description').val($(this).data('description'));
 

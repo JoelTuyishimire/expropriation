@@ -18,8 +18,8 @@ class CreatePropertyItemsTable extends Migration
             $table->foreignId('property_type_id')->nullable()->constrained();
             $table->string('name');
             $table->string('name_en')->nullable();
-            $table->string('measurement_unit')->nullable();
-            $table->double('unit_price')->default(0);
+            $table->string('measurement')->nullable();
+            $table->double('price')->default(0);
             $table->text('description')->nullable();
             $table->string('location')->nullable();
 
