@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expropriation;
+use App\Models\ExpropriationDetail;
 use App\Models\PropertyItem;
 use Illuminate\Http\Request;
 
@@ -40,8 +41,28 @@ class ExpropriationController extends Controller
      */
     public function store(Request $request)
     {
-//        save array using many to many
-        dd($request->all());
+        $expo = Expropriation::create([
+            'property_type_id' => $request->property_type_id,
+            'citizen_id' => $request->citizen_id,
+            'done_by' => auth()->user()->id,
+            'amount' => $request->total,
+            'description' => $request->note,
+            'province_id' => $request->province_id,
+            'district_id' => $request->district_id,
+            'sector_id' => $request->sector_id,
+        ]);
+
+        foreach ($request->product_id as $key => $product) {
+            ExpropriationDetail::create([
+                'expropriation_id' => $expo->id,
+                'property_item_id' => $product,
+                'property_type_id' => $request->property_type_id,
+                'quantity' => $request->Quantity[$key],
+                'price' => $request->UnitPrice[$key],
+            ]);
+        }
+
+        return redirect()->route('admin.expropriations.index')->with('success', 'Expropriation created successfully');
     }
 
     /**
@@ -51,17 +72,6 @@ class ExpropriationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Expropriation $expropriation)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Expropriation  $expropriation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Expropriation $expropriation)
     {
         //
     }

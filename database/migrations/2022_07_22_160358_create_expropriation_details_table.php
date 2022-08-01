@@ -19,7 +19,7 @@ class CreateExpropriationDetailsTable extends Migration
             $table->foreignId('property_type_id')->constrained();
             $table->foreignId('property_item_id')->constrained();
             $table->double('quantity')->default(0);
-            $table->double('unit_price')->default(0);
+            $table->double('price')->default(0);
 
             $table->timestamps();
         });

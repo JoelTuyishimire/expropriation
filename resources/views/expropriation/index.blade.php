@@ -58,18 +58,36 @@
                         <thead>
                         <tr>
                             <td>#</td>
-                            <td>Name</td>
-                            <td>Name En</td>
+                            <td>Citizen Name</td>
+                            <td>Citizen Phone</td>
+                            <td>Property Type</td>
+                            <td>Property Address</td>
+{{--                            <td>Property Area</td>--}}
+                            <td>Property Price</td>
+                            <td>Expropriation Date</td>
+                            <td>Expropriation Reason</td>
+                            <td>Expropriation Status</td>
                             <td>Action</td>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($expropriations ?? []  as $key=>$propertyType)
+                        @foreach($expropriations ?? []  as $key=>$expopriation)
                             <tr>
                                 <td>{{ ++$key }}</td>
 
-                                <td>{{ $propertyType->name }}</td>
-                                <td>{{ $propertyType->name_en }}</td>
+                                <td>{{ optional($expopriation->citizen)->name }}</td>
+                                <td>{{ optional($expopriation->citizen)->telephone }}</td>
+                                <td>{{ optional($expopriation->propertyType)->name }}</td>
+                                <td>{{
+                                        optional($expopriation->province)->name
+                                       ." - ". optional($expopriation->district)->name ." - ".
+                                        optional($expopriation->sector)->name
+                                    }}
+                                </td>
+                                <td>{{$expopriation->amount}}</td>
+                                <td>{{$expopriation->created_at}}</td>
+                                <td>{{$expopriation->description}}</td>
+                                <td>{{$expopriation->status}}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-primary  dropdown-toggle btn-sm"
@@ -77,13 +95,12 @@
                                                 aria-expanded="false">Actions</button>
                                         <div class="dropdown-menu" style="">
                                             <a class="dropdown-item dropdown-item-color btn-edit" href="#"
-                                               data-name="{{$propertyType->name}}"
-                                               data-name-en="{{$propertyType->name_en}}"
-                                               data-url="{{ route('admin.property-types.update', encryptId($propertyType->id)) }}"
+
+                                               data-url="{{ route('admin.property-types.update', encryptId($expopriation->id)) }}"
                                                data-toggle="modal"
                                                data-target="#editModal"> <i class="la la-pencil"></i> Edit</a>
                                             <a class="dropdown-item dropdown-item-color btn-delete" href="#"
-                                               data-url="{{ route('admin.property-types.destroy', encryptId($propertyType->id))}}"><i class="la la-trash"></i> Delete</a>
+                                               data-url="{{ route('admin.property-types.destroy', encryptId($expopriation->id))}}"><i class="la la-trash"></i> Delete</a>
                                         </div>
                                     </div>
                                 </td>

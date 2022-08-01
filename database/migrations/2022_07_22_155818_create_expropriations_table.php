@@ -17,12 +17,14 @@ class CreateExpropriationsTable extends Migration
             $table->id();
             $table->foreignId('citizen_id')->constrained('users');
             $table->foreignId('done_by')->constrained('users');
+            $table->foreignId('property_type_id')->constrained('property_types');
             $table->double('amount')->default(0);
             $table->string('description')->nullable();
             $table->foreignId('province_id')->nullable()->constrained();
             $table->foreignId('district_id')->nullable()->constrained();
             $table->foreignId('sector_id')->nullable()->constrained();
             $table->foreignId('cell_id')->nullable()->constrained();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
