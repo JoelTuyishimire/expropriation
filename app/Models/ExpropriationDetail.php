@@ -16,13 +16,13 @@ class ExpropriationDetail extends Model
         return $this->belongsTo(Expropriation::class);
     }
 
-    public function propertyItem()
+    public function item()
     {
-        return $this->belongsTo(PropertyItem::class);
+        return $this->belongsTo(PropertyItem::class,'property_item_id');
     }
 
-    public function propertyType()
+    public function type()
     {
-        return $this->belongsTo(PropertyType::class);
+        return $this->belongsTo(PropertyType::class,'property_type_id');
     }
 }

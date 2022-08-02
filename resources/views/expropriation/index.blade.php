@@ -59,13 +59,13 @@
                         <tr>
                             <td>#</td>
                             <td>Citizen Name</td>
-                            <td>Citizen Phone</td>
+{{--                            <td>Citizen Phone</td>--}}
                             <td>Property Type</td>
                             <td>Property Address</td>
 {{--                            <td>Property Area</td>--}}
                             <td>Property Price</td>
                             <td>Expropriation Date</td>
-                            <td>Expropriation Reason</td>
+{{--                            <td>Expropriation Reason</td>--}}
                             <td>Expropriation Status</td>
                             <td>Action</td>
                         </tr>
@@ -76,7 +76,7 @@
                                 <td>{{ ++$key }}</td>
 
                                 <td>{{ optional($expopriation->citizen)->name }}</td>
-                                <td>{{ optional($expopriation->citizen)->telephone }}</td>
+{{--                                <td>{{ optional($expopriation->citizen)->telephone }}</td>--}}
                                 <td>{{ optional($expopriation->propertyType)->name }}</td>
                                 <td>{{
                                         optional($expopriation->province)->name
@@ -86,7 +86,7 @@
                                 </td>
                                 <td>{{$expopriation->amount}}</td>
                                 <td>{{$expopriation->created_at}}</td>
-                                <td>{{$expopriation->description}}</td>
+{{--                                <td>{{$expopriation->description}}</td>--}}
                                 <td>{{$expopriation->status}}</td>
                                 <td>
                                     <div class="btn-group">
@@ -94,6 +94,16 @@
                                                 data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">Actions</button>
                                         <div class="dropdown-menu" style="">
+                                            <a class="dropdown-item btn-submit" href="{{route('admin.expropriations.submit',$expopriation->id)}}">
+                                                <i class="la la-eye"></i>
+                                                Submit for Review
+                                            </a>
+                                            <a class="dropdown-item"
+                                               href="{{route('admin.expropriations.show',$expopriation->id)}}">
+                                                <i class="la la-file-contract"></i>
+                                                Details
+                                            </a>
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item dropdown-item-color btn-edit" href="#"
 
                                                data-url="{{ route('admin.property-types.update', encryptId($expopriation->id)) }}"
@@ -223,6 +233,25 @@
                 if (result.value) {
                     $('#delete-property-types-form').attr("action", url);
                     $('#delete-property-types-form').submit();
+                }
+            });
+        })
+        $(document).on('click', '.btn-submit', function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            swal.fire({
+                title: 'Are you sure?',
+                text: "This Expropriation Will be Submitted.",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#06c4ff',
+                confirmButtonText: 'Yes, Continue',
+                cancelButtonColor: '#ff1533',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+                        window.location.href = url;
                 }
             });
         })

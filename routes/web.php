@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[\App\Http\Controllers\DashboardController::class,'index'])->name("admin.dashboard")->middleware("auth");
 
 Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
+    Route::get('/dashboard',[\App\Http\Controllers\DashboardController::class,'index'])->name("dashboard");
     //user mngmt
     Route::prefix('user-management')->group(function () {
         //permission routes
@@ -59,6 +60,10 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
 
     //Route expropriation
     Route::resource('expropriations', \App\Http\Controllers\ExpropriationController::class);
+    //Route expropriation submit route
+    Route::get('/expropriations/{expropriation}/submit', [App\Http\Controllers\ExpropriationController::class, 'submit'])->name('expropriations.submit');
+    //review user request
+    Route::post('{expropriation}/review', [App\Http\Controllers\ExpropriationController::class, 'review'])->name('expropriations.review');
 
 });
 

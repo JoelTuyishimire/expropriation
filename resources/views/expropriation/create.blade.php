@@ -347,6 +347,17 @@
 
     <script>
 
+        let products = {!! json_encode($products) !!};
+
+
+        $('#property_type').change('change',function () {
+            //make ajax to get property item belong to that property type selected
+            let property_type = $(this).val();
+            let property_item = $('#property_item');
+            property_item.empty();
+            property_item.append("<option value='' selected disabled>--Choose Property Item--</option>");
+
+        });
 
         $.fn.modal.Constructor.prototype.enforceFocus = function () {
         };
@@ -410,7 +421,7 @@
 
         let alreadyOpen = false;
         let storages = null
-        let products = {!! json_encode($products) !!};
+
 
 
         let rates = [];

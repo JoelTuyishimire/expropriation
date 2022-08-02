@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Expropriation extends Model
+class Expropriation extends ExpropriationBaseModel
 {
     use HasFactory;
 
@@ -44,5 +44,20 @@ class Expropriation extends Model
     public function cell()
     {
         return $this->belongsTo(Cell::class);
+    }
+
+    public function histories()
+    {
+        return $this->hasMany(ExpropriationHistory::class, 'expropriation_id');
+    }
+
+    public function history()
+    {
+        return $this->HasOne(ExpropriationHistory::class);
+    }
+    //set total price from unit price times quantity
+    public function setTotalPriceAttribute($value)
+    {
+        $this->attributes['total_price'] = $value * $this->attributes['quantity'];
     }
 }
