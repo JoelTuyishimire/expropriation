@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FileManager;
 use App\Models\Expropriation;
 use App\Models\ExpropriationDetail;
 use App\Models\ExpropriationHistory;
@@ -88,22 +89,6 @@ class ExpropriationController extends Controller
      * @param  \App\Models\Expropriation  $expropriation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expropriation $expropriation)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Expropriation  $expropriation
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Expropriation $expropriation)
-    {
-        //
-    }
-
     public function submit(Expropriation $expropriation)
     {
         $expropriation->update([
@@ -131,7 +116,7 @@ class ExpropriationController extends Controller
             abort(403);
         }
     }
-        function reviewExpropriation($request, Expropriation $expropriation): \Illuminate\Http\RedirectResponse
+    function reviewExpropriation($request, Expropriation $expropriation): \Illuminate\Http\RedirectResponse
         {
             $user = auth()->user();
             DB::beginTransaction();
@@ -142,7 +127,7 @@ class ExpropriationController extends Controller
             DB::commit();
             return redirect()->back()->with("success", "Review is stored Successfully");
         }
-        public function storeHistory($request, Expropriation $expropriation,$user,$status,$comment,$message_to_applicant,$is_comment=1)
+    public function storeHistory($request, Expropriation $expropriation,$user,$status,$comment,$message_to_applicant,$is_comment=1)
         {
             if ($request->hasFile('attachment')){
                 $file=$request->file('attachment');
@@ -161,4 +146,45 @@ class ExpropriationController extends Controller
             $history->attachments = $attachment_name ?? null;
             $history->save();
         }
+    protected function approveExpropriation($request,Expropriation $expropriation): \Illuminate\Http\RedirectResponse
+    {
+        $user=auth()->user();
+        $lastReturn=null;
+        DB::beginTransaction();
+        if(in_array($request->status,[Expropriation::RETURN_BACK_TO_REVIEW])){
+            $lastReturn=$expropriation->status;
+            $expropriation->status=Expropriation::SUBMITTED;
+            $expropriation->last_return=Expropriation::REVIEWED;
+            $return="Expropriation is returned back for review";
+        }
+        if(in_array($request->status,[Expropriation::REJECTED,Expropriation::RETURN_BACK])){
+            if($request->status==Expropriation::RETURN_BACK){
+                $lastReturn=$expropriation->status;
+                $return="Expropriation is returned back";
+            }else{
+                $expropriation->rejected_by=auth()->user()->id;
+                $expropriation->rejection_date=now()->toDateString();
+                $return="Expropriation is Rejected";
+            }
+            $expropriation->status=$request->status;
+            $expropriation->last_return=$lastReturn;
+
+            $message=$request->message;
+
+        }
+        if(in_array($request->status,[Expropriation::APPROVED]))
+        {
+            $expropriation->status=$request->status;
+            $expropriation->last_return=$lastReturn;
+            $expropriation->approved_by=auth()->user()->id;
+            $expropriation->approval_date=now()->toDateString();
+            $return="Expropriation is Approved";
+            $message="Your Expropriation is approved";
+        }
+        $expropriation->save();
+        $this->storeHistory($request, $expropriation,$user,$request->status,$request->comment,$request->message);
+        DB::commit();
+        return redirect()->back()->with("success",$return);
+    }
+
 }

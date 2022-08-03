@@ -99,4 +99,9 @@ class PropertyItemController extends Controller
             'histories' => $item->histories()->orderBy('created_at', 'desc')->get()
         ]);
     }
+    public function propertyItemsByPropertyType($propertyType)
+    {
+        $propertyType = PropertyType::find($propertyType);
+        return $propertyType->propertyItems;
+    }
 }

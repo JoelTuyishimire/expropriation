@@ -347,17 +347,8 @@
 
     <script>
 
-        let products = {!! json_encode($products) !!};
 
-
-        $('#property_type').change('change',function () {
-            //make ajax to get property item belong to that property type selected
-            let property_type = $(this).val();
-            let property_item = $('#property_item');
-            property_item.empty();
-            property_item.append("<option value='' selected disabled>--Choose Property Item--</option>");
-
-        });
+        let products = [];
 
         $.fn.modal.Constructor.prototype.enforceFocus = function () {
         };
@@ -513,32 +504,32 @@
             return valid;
         }
 
-        // $(document).on('submit', '#quotation_form', function (e) {
-        //
-        //
-        //     const elem = $(this);
-        //     if(customValidation()){
-        //         if (data.length <= 0) {
-        //             swal({
-        //                 title: "Alert",
-        //                 text: "Items are required"
-        //             });
-        //             e.preventDefault();
-        //             return;
-        //         }
-        //
-        //         if(!$(this).valid()){
-        //             e.preventDefault();
-        //         }else {
-        //             const btn = elem.find("button[type=submit]");
-        //             btn.prop("disabled", true);
-        //             btn.addClass('spinner spinner-right spinner-white spinner-sm');
-        //         }
-        //     }
-        //     else{
-        //         e.preventDefault();
-        //     }
-        // });
+        $(document).on('submit', '#quotation_form', function (e) {
+
+
+            const elem = $(this);
+            if(customValidation()){
+                if (data.length <= 0) {
+                    swal({
+                        title: "Alert",
+                        text: "Items are required"
+                    });
+                    e.preventDefault();
+                    return;
+                }
+
+                if(!$(this).valid()){
+                    e.preventDefault();
+                }else {
+                    const btn = elem.find("button[type=submit]");
+                    btn.prop("disabled", true);
+                    btn.addClass('spinner spinner-right spinner-white spinner-sm');
+                }
+            }
+            else{
+                e.preventDefault();
+            }
+        });
 
 
         let data = [];
@@ -974,6 +965,22 @@
                     }
                 }
             )
+        });
+
+        $(document).on('change','#property_type',function () {
+            //make ajax to get property item belong to that property type selected
+            let property_type = $(this).val();
+            console.log(property_type);
+            let url = '/property-items/'+property_type;
+            $.get(url, function(data, status){
+                if(data.length > 0){
+                    products = data;
+                    addRowItem();
+                }else{
+                    products = [];
+                    addRowItem();
+                }
+            });
         });
     </script>
 

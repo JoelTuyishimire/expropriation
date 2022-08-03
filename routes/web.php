@@ -71,5 +71,7 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
 Route::get('districts/{province}', [\App\Http\Controllers\LocalityController::class,'districtsByProvince']);
 Route::get('sectors/{district}', [\App\Http\Controllers\LocalityController::class,'sectorsByDistrict']);
 Route::get('cells/{sector}', [\App\Http\Controllers\LocalityController::class,'cellsBySector']);
+//get property items by property type
+Route::get('property-items/{property_type}', [\App\Http\Controllers\PropertyItemController::class,'propertyItemsByPropertyType'])->name('property-items.by.property.type');
 
 Auth::routes();
