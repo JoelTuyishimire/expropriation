@@ -75,10 +75,7 @@ function isNotBranch(): bool
 function canReviewExpropriation(\App\Models\Expropriation $expropriation): bool
 {
     $user = auth()->user();
-    if (in_array($expropriation->status, [\App\Models\Expropriation::SUBMITTED]) && $user->can('Review Expropriation')) {
-        return true;
-    }
-    if (in_array($expropriation->status, [\App\Models\Expropriation::REVIEWED]) && $user->can('Approve Expropriation')) {
+    if (in_array($expropriation->status, [\App\Models\Expropriation::SUBMITTED]) && $user->can('Approve Expropriation')) {
         return true;
     }
     return false;

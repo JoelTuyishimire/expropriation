@@ -28,7 +28,9 @@ class CreateExpropriationsTable extends Migration
             $table->string('review_decision')->nullable();
             $table->string('last_return')->nullable();
             $table->foreignId('approved_by')->nullable()->constrained('users');
+            $table->foreignId('rejected_by')->nullable()->constrained('users');
             $table->date('approval_date')->nullable();
+            $table->date('rejection_date')->nullable();
             $table->timestamps();
         });
     }

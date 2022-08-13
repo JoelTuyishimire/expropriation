@@ -102,31 +102,13 @@ class ExpropriationController extends Controller
         $user = auth()->user();
 
         if (in_array($Expropriation->status, [Expropriation::SUBMITTED])
-            && in_array($request->status, [Expropriation::PROPOSE_TO_REJECT, Expropriation::PROPOSE_TO_RETURN_BACK, Expropriation::PROPOSE_TO_APPROVE, Expropriation::REJECTED])
-            && $user->can('Review Expropriations')) {
-            if ($request->status == Expropriation::REJECTED)
-                return $this->approveExpropriation($request, $Expropriation);
-            else
-                return $this->reviewExpropriation($request, $Expropriation);
-        } else if ($Expropriation->status == Expropriation::REVIEWED
-            && in_array($request->status, [Expropriation::APPROVED, Expropriation::REJECTED, Expropriation::RETURN_BACK_TO_REVIEW, Expropriation::RETURN_BACK])
+            && in_array($request->status, [Expropriation::REJECTED, Expropriation::APPROVED])
             && $user->can('Approve Expropriations')) {
             return $this->approveExpropriation($request, $Expropriation);
-        } else {
+        }else {
             abort(403);
         }
     }
-    function reviewExpropriation($request, Expropriation $expropriation): \Illuminate\Http\RedirectResponse
-        {
-            $user = auth()->user();
-            DB::beginTransaction();
-            $expropriation->status = Expropriation::REVIEWED;
-            $expropriation->review_decision = $request->status;
-            $expropriation->save();
-            $this->storeHistory($request, $expropriation, $user, $request->status, $request->comment, $request->message);
-            DB::commit();
-            return redirect()->back()->with("success", "Review is stored Successfully");
-        }
     public function storeHistory($request, Expropriation $expropriation,$user,$status,$comment,$message_to_applicant,$is_comment=1)
         {
             if ($request->hasFile('attachment')){
@@ -151,21 +133,12 @@ class ExpropriationController extends Controller
         $user=auth()->user();
         $lastReturn=null;
         DB::beginTransaction();
-        if(in_array($request->status,[Expropriation::RETURN_BACK_TO_REVIEW])){
-            $lastReturn=$expropriation->status;
-            $expropriation->status=Expropriation::SUBMITTED;
-            $expropriation->last_return=Expropriation::REVIEWED;
-            $return="Expropriation is returned back for review";
-        }
-        if(in_array($request->status,[Expropriation::REJECTED,Expropriation::RETURN_BACK])){
-            if($request->status==Expropriation::RETURN_BACK){
-                $lastReturn=$expropriation->status;
-                $return="Expropriation is returned back";
-            }else{
-                $expropriation->rejected_by=auth()->user()->id;
-                $expropriation->rejection_date=now()->toDateString();
-                $return="Expropriation is Rejected";
-            }
+        if(in_array($request->status,[Expropriation::REJECTED])){
+
+            $expropriation->rejected_by=auth()->user()->id;
+            $expropriation->rejection_date=now()->toDateString();
+            $return="Expropriation is Rejected";
+
             $expropriation->status=$request->status;
             $expropriation->last_return=$lastReturn;
 

@@ -79,12 +79,6 @@
         </div>
 
         @if(canReviewExpropriation($expropriation))
-            @php
-                $message=null;
-                if(in_array($expropriation->review_decision,[\App\Models\Expropriation::PROPOSE_TO_RETURN_BACK,\App\Models\Expropriation::PROPOSE_TO_REJECT])){
-                $message=$expropriation->histories()->latest()->first()->external_comment??null;
-                }
-            @endphp
             <div class="row">
                 <div class="col-md-8">
                     <h4 class="text-center mb-4">Review</h4>
@@ -100,7 +94,7 @@
                         <div class="form-group row">
                             <label for="status"
                                    class="col-sm-3 col-form-label text-md-right">
-                                {{$expropriation->status==\App\Models\ExpropriationBaseModel::REVIEWED?'Mark As':'Decision'}}
+                                Decision
                             </label>
                             <div class="col-sm-9">
                                 <select required name="status" id="status" class="custom-select">

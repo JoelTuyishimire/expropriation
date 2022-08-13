@@ -11,34 +11,17 @@ class ExpropriationBaseModel extends Model
 
     //application statuses
     const DRAFT = "Draft";
+    const PENDING = "Pending";
     const SUBMITTED = "Submitted";
-    const UNDER_REVIEW = "Under review";
-    const REVIEWED = "Reviewed";
     const APPROVED = "Approved";
     const REJECTED = "Rejected";
-    const SUSPENDED = "Suspended";
-    const RETURN_BACK = "Returned";
-    const PROPOSE_TO_APPROVE = "Propose to approve";
-    const PROPOSE_TO_RETURN_BACK = "Propose to return";
-    const PROPOSE_TO_REJECT = "Propose to reject";
-    const RETURN_BACK_TO_REVIEW="Returned for review";
-
     /**
      * get application status for approval
      */
     public function getMyStatuses(): array
     {
         if (in_array($this->status, [self::SUBMITTED])) {
-            return [self::PROPOSE_TO_APPROVE, self::REJECTED];
-        }
-        if ($this->status == self::REVIEWED) {
-            if (in_array($this->review_decision, [self::PROPOSE_TO_APPROVE])) {
-                return [self::APPROVED,self::RETURN_BACK_TO_REVIEW];
-            } else if (in_array($this->review_decision, [self::PROPOSE_TO_RETURN_BACK])) {
-                return [self::RETURN_BACK,self::RETURN_BACK_TO_REVIEW];
-            } else {
-                return [self::REJECTED,self::RETURN_BACK_TO_REVIEW];
-            }
+            return [self::APPROVED, self::REJECTED];
         }
         return [];
     }
@@ -47,13 +30,11 @@ class ExpropriationBaseModel extends Model
      */
     public function getStatusColorAttribute(): string
     {
-        if (in_array($this->status, [self::PROPOSE_TO_APPROVE,self::REVIEWED])) {
+        if (in_array($this->status, [self::DRAFT,self::PENDING])) {
             $statusColor = "info";
-        } else if (in_array($this->status, [self::REJECTED, self::PROPOSE_TO_REJECT, self::SUSPENDED])) {
+        } else if (in_array($this->status, [self::REJECTED])) {
             $statusColor = "danger";
-        } else if (in_array($this->status, [self::DRAFT, self::PROPOSE_TO_RETURN_BACK, self::RETURN_BACK,self::RETURN_BACK_TO_REVIEW])) {
-            $statusColor = "warning";
-        }else if (in_array($this->status, [self::UNDER_REVIEW,self::SUBMITTED])) {
+        } if (in_array($this->status, [self::SUBMITTED])) {
             $statusColor = "primary";
         }else{
             $statusColor = "success";
@@ -65,16 +46,13 @@ class ExpropriationBaseModel extends Model
     {
         return[
             self::SUBMITTED,
-//            self::UNDER_REVIEW,
-            self::REVIEWED,
             self::APPROVED,
-//            self::RETURN_BACK,
             self::REJECTED,
         ];
     }
 
     public function getMessageStatuses(): array
     {
-        return [self::PROPOSE_TO_RETURN_BACK, self::PROPOSE_TO_REJECT, self::RETURN_BACK, self::REJECTED];
+        return [self::REJECTED];
     }
 }

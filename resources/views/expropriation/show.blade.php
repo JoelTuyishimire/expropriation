@@ -56,23 +56,23 @@
 
                 </div>
                 <ul class="nav nav-pills my-3" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                           aria-controls="pills-home" aria-selected="true">
-                            <i class="flaticon2-copy text-white"></i>
-                            &nbsp;
-                            Details
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"--}}
+{{--                           aria-controls="pills-home" aria-selected="true">--}}
+{{--                            <i class="flaticon2-copy text-white"></i>--}}
+{{--                            &nbsp;--}}
+{{--                            Details--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
-                           aria-controls="pills-contact" aria-selected="false">
-                            <i class="flaticon2-list text-white"></i>
-                            &nbsp;
-                            History
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"--}}
+{{--                           aria-controls="pills-contact" aria-selected="false">--}}
+{{--                            <i class="flaticon2-list text-white"></i>--}}
+{{--                            &nbsp;--}}
+{{--                            History--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
             </div>
         </div>
@@ -108,9 +108,9 @@
                 @include('expropriation.partials._review_approval')
 
             </div>
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                @include('expropriation.partials._history')
-            </div>
+{{--            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">--}}
+{{--                @include('expropriation.partials._history')--}}
+{{--            </div>--}}
         </div>
 
     </div>
