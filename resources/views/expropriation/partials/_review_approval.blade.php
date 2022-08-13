@@ -142,16 +142,6 @@
                             </div>
 
                         </div>
-                        <div class="form-group row " id="message-container">
-                            <label for="message-id"
-                                   class="col-sm-3 col-form-label text-md-right">Message To Applicant</label>
-                            <div class="col-sm-9">
-                                            <textarea name="message" id="message-id" rows="5"
-                                                      class="form-control">{{$message??''}}</textarea>
-
-                            </div>
-
-                        </div>
                         <div class="form-group row">
                             <div class="col-sm-9 offset-md-3">
                                 <button type="submit" class="btn btn-primary"

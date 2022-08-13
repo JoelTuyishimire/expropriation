@@ -26,14 +26,10 @@ class UserController extends Controller
 
     public function index()
     {
-        $data = User::with(["permissions", "branch"]);
-        if (auth()->user()->branch_id) {
-            $data = $data->where("branch_id", auth()->user()->branch_id);
-        }
+        $data = User::with(["permissions"]);
         $data = $data->orderBy('updated_at', 'desc')->select("users.*")->get();
         $dataTable = new UserDataTable($data);
-        $branches = Branch::query()->where("status", "Active")->get();
-        return $dataTable->render('admin.user_management.users', compact("branches"));
+        return $dataTable->render('admin.user_management.users');
     }
 
 
@@ -60,7 +56,6 @@ class UserController extends Controller
 //        $user->password = bcrypt('Password@123!');
         $user->password = bcrypt($ini_pass);
         $user->is_super_admin = false;
-        $user->branch_id = $request->branch;
         $user->gender = $request->gender;
         $user->save();
         $this->dispatch(new MailRegisteredUser($user->email,$ini_pass,$user->name,$user->telephone));
@@ -87,7 +82,6 @@ class UserController extends Controller
             $user->photo = $filename;
         }
         $user->is_active = $request->is_active;
-        $user->branch_id = $request->branch;
         $user->save();
         return redirect()->back()->with('success', 'User Updated successfully');
     }
@@ -117,17 +111,6 @@ class UserController extends Controller
         $message = "Your Account password has been reset. use this \" $password \" as password to login to your account.";
         $this->sendSMS($user, $message);
     }
-
-    public function getUsersByBranch(Request $request)
-    {
-        $branches = $request->branches;
-        if ($branches) {
-            return User::whereIn("branch_id", $branches)->get();
-        }
-
-        return [];
-    }
-
     protected static function storeFile($request, $paramName)
     {
         $file = $request->file($paramName);

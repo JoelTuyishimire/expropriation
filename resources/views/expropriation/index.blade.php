@@ -94,23 +94,26 @@
                                                 data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">Actions</button>
                                         <div class="dropdown-menu" style="">
-                                            <a class="dropdown-item btn-submit" href="{{route('admin.expropriations.submit',$expopriation->id)}}">
-                                                <i class="la la-eye"></i>
-                                                Submit for Review
-                                            </a>
                                             <a class="dropdown-item"
                                                href="{{route('admin.expropriations.show',$expopriation->id)}}">
                                                 <i class="la la-file-contract"></i>
                                                 Details
                                             </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item dropdown-item-color btn-edit" href="#"
+                                            @if($expopriation->status == 'pending')
+                                                <a class="dropdown-item btn-submit" href="{{route('admin.expropriations.submit',$expopriation->id)}}">
+                                                    <i class="la la-eye"></i>
+                                                    Submit for Review
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                {{--                                            <a class="dropdown-item dropdown-item-color btn-edit" href="#"--}}
 
-                                               data-url="{{ route('admin.property-types.update', encryptId($expopriation->id)) }}"
-                                               data-toggle="modal"
-                                               data-target="#editModal"> <i class="la la-pencil"></i> Edit</a>
-                                            <a class="dropdown-item dropdown-item-color btn-delete" href="#"
-                                               data-url="{{ route('admin.property-types.destroy', encryptId($expopriation->id))}}"><i class="la la-trash"></i> Delete</a>
+                                                {{--                                               data-url="{{ route('admin.property-types.update',$expopriation->id) }}"--}}
+                                                {{--                                               data-toggle="modal"--}}
+                                                {{--                                               data-target="#editModal"> <i class="la la-pencil"></i> Edit</a>--}}
+                                                <a class="dropdown-item dropdown-item-color btn-delete" href="#"
+                                                   data-url="{{ route('admin.expropriations.edit', $expopriation->id)}}"><i class="la la-trash"></i> Delete</a>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </td>

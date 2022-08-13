@@ -126,19 +126,6 @@
                                            aria-describedby="emailHelp"
                                            placeholder="Telephone">
                                 </div>
-                                @if(auth()->user()->branch_id)
-                                    <input type="hidden" name="branch" value="{{auth()->user()->branch_id}}">
-                                @else
-                                    <div class="col-md-6 form-group">
-                                        <label for="add-branch"> Branch</label>
-                                        <select id="add-branch" name="branch" class="form-control">
-                                            <option selected disabled value="">---select--</option>
-                                            @foreach($branches as $branch)
-                                                <option {{in_array($branch->id,request('branches')??[])?'selected':''}} value="{{$branch->id}}">{{$branch->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
                             </div>
 
                         </div>
@@ -216,20 +203,6 @@
                                            aria-describedby="emailHelp"
                                            placeholder="Telephone">
                                 </div>
-
-                                @if(auth()->user()->branch_id)
-                                    <input type="hidden" name="branch" value="{{auth()->user()->branch_id}}">
-                                @else
-                                    <div class="col-md-6 form-group">
-                                        <label for="edit-branch"> Branch</label>
-                                        <select id="edit-branch" name="branch" class="form-control">
-                                            <option selected disabled value="">---select--</option>
-                                            @foreach($branches as $branch)
-                                                <option {{in_array($branch->id,request('branches')??[])?'selected':''}} value="{{$branch->id}}">{{$branch->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
                                 <div class="col-md-6 form-group">
                                     <label for="is_active">Active</label>
                                     <select class="form-control form-control-sm" id="is_active" name="is_active">

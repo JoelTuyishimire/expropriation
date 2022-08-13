@@ -1,161 +1,113 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
-<!-- begin::Head -->
-<head>
-
-    <!--begin::Base Path (base relative path for assets2 of this page) -->
-    <base href="../">
-
-    <!--end::Base Path -->
-    <meta charset="utf-8"/>
-    <title>Login : Expropriation SYSTEM</title>
-    <meta name="description" content="Latest updates and statistic charts">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!--begin::Fonts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
-    <script>
-        WebFont.load({
-            google: {
-                "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
-            },
-            active: function () {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
-
-    <!--end::Fonts -->
-
-    <!--begin::Page Vendors Styles(used by this page) -->
-    <link href="{{asset('assets/css/pages/login/classic/login-3.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+<!--begin::Head-->
+<head><base href="../../../">
+    <meta charset="utf-8" />
+    <title> Login Page</title>
+    <meta name="description" content="Login page example" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Page Custom Styles(used by this page)-->
+    <link href="{{asset("assets/css/pages/login/login-1.css?v=7.0.3")}}" rel="stylesheet" type="text/css" />
     <!--end::Page Custom Styles-->
     <!--begin::Global Theme Styles(used by all pages)-->
-    <link href="{{asset('assets/plugins/global/plugins.bundle.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/plugins/custom/prismjs/prismjs.bundle.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/style.bundle.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-
-    <!--end::Global Theme Styles -->
-
-    <!--begin::Layout Skins(used by all pages) -->
-
-    <!--end::Layout Skins -->
-    <link rel="shortcut icon" href="{{asset("img/logo.png")}}"/>
+    <link href="{{asset("assets/css/style.bundle.css?v=7.0.3")}}" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <!--end::Layout Themes-->
+    <link rel="shortcut icon" href="{{asset('img/logo.png')}}" />
 </head>
-
-<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<!--end::Head-->
+<!--begin::Body-->
+<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled page-loading">
 <!--begin::Main-->
 <div class="d-flex flex-column flex-root">
     <!--begin::Login-->
-    <div class="login login-3 login-signin-on d-flex flex-row-fluid" id="kt_login">
-        <div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid" style="background-image: url({{asset('assets/media/bg/bg-2.jpg')}});">
-            <div class="login-form text-center text-white p-7 position-relative overflow-hidden">
-                <!--begin::Login Header-->
-                <div class="d-flex flex-center mb-15">
-                    <a href="#">
-                        <img src="{{asset("img/Expropriation SYSTEM.png")}}" class="max-h-100px rounded-pill" alt="" />
-                    </a>
-                </div>
-                <!--end::Login Header-->
-                <!--begin::Login Sign in form-->
-                <div class="login-signin">
-                    <div class="mb-20">
-                        <h3>Sign In To  Expropriation SYSTEM</h3>
-                    </div>
-
-                    @if(\Illuminate\Support\Facades\Session::has('success'))
-                        <div class="alert alert-custom alert-success fade show py-2" role="alert">
-                            <div class="alert-icon"><i class="la la-check-circle"></i></div>
-                            <div class="alert-text">
-                                <span>{{ \Illuminate\Support\Facades\Session::get('success') }}</span>
-                            </div>
-                            <div class="alert-close">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"><i class="ki ki-close"></i></span>
-                                </button>
-                            </div>
-                        </div>
-                    @endif
-                    @if(\Illuminate\Support\Facades\Session::has('error'))
-                        <div class="alert alert-custom alert-danger fade show py-2" role="alert">
-                            <div class="alert-icon"><i class="la la-warning"></i></div>
-                            <div class="alert-text">
-                                <span>{{ \Illuminate\Support\Facades\Session::get("error") }}</span>
-                            </div>
-                            <div class="alert-close">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"><i class="ki ki-close"></i></span>
-                                </button>
-                            </div>
-                        </div>
-                    @endif
-                    <form class="form" id="kt_login_signin_form" method="POST" action="{{ route('login')}}">
-                        @csrf
-                        <div class="form-group text-left">
-                            <label for="" class="ml-5" style="color: white !important;">Email</label>
-                            <input type="hidden" id="fcm_token" name="fcm_token">
-                            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5"
-                                   type="text"
-                                   value="{{ old('email') }}"
-                                   style="background-color: white !important;color: black !important;"
-                                   placeholder="User Name" name="email" required />
-                            @if ($errors->has('email'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-                        <div class="form-group text-left">
-                            <label for="" class="ml-5 white" style="color: white !important;">Password</label>
-                            <div class="input-icon input-icon-right">
-                                <input style="background-color: white !important;color: black !important;" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5" type="password"
-                                       placeholder="Password" name="password" id="password" required />
-                                <span><i class="flaticon-eye icon-md" id="show-password"></i></span>
-                            </div>
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-
-                        @if (Route::has('password.request'))
-                            <div class="col kt-align-right">
-                                <a href="{{ url('/password/reset') }}" id="kt_login_forgot" class="kt-login__link">Forget Password ?</a>
-                            </div>
-                        @endif
-                        <div class="form-group text-center mt-10">
-                            <button id="kt_login_signin_submit" class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3">Sign In</button>
-                        </div>
-                    </form>
-                </div>
-                <!--end::Login Sign in form-->
+    <div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
+        <!--begin::Aside-->
+        <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #E1EBDC;">
+            <!--begin::Aside Top-->
+            <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
+                <!--begin::Aside header-->
+                <a href="#" class="text-center mb-10">
+                    <img src="{{asset('img/logo.png')}}" class="max-h-70px" alt="" />
+                </a>
+                <!--end::Aside header-->
+                <!--begin::Aside title-->
+                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">Welcome to
+                    <br />Expropriation Management System</h3>
+                <!--end::Aside title-->
             </div>
+            <!--end::Aside Top-->
+            <!--begin::Aside Bottom-->
+            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{asset("img/splash.svg")}})"></div>
+            <!--end::Aside Bottom-->
         </div>
+        <!--begin::Aside-->
+        <!--begin::Content-->
+        <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
+            <!--begin::Content body-->
+            <div class="d-flex flex-column-fluid flex-center">
+                <!--begin::Signin-->
+                <div class="login-form login-signin">
+                    <!--begin::Form-->
+                    <form class="form" action="{{ route('login') }}" method="post">
+                        @csrf
+                        <!--begin::Title-->
+                        <div class="pb-13 pt-lg-0 pt-5">
+                            <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
+                                Login
+                            </h3>
+                        </div>
+                        <!--begin::Title-->
+                        <!--begin::Form group-->
+                        <div class="form-group">
+                            <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('email') is-invalid @enderror" type="text" name="email" autocomplete="off" />
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <!--end::Form group-->
+                        <!--begin::Form group-->
+                        <div class="form-group">
+                            <div class="d-flex justify-content-between mt-n5">
+                                <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
+                                <a href="{{ url('/password/reset') }}" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Forgot Password ?</a>
+                            </div>
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('password') is-invalid @enderror" type="password" name="password" autocomplete="off" />
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group fv-plugins-icon-container">
+                            <label class="checkbox mb-0 text-primary">
+                                <input type="checkbox" value="1" name="remember">Remember me
+                                <span></span></label>
+                            <div class="fv-plugins-message-container"></div></div>
+                        <div class="pb-lg-0 pb-5">
+                            <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"> Sign In</button>
+                        </div>
+                        <!--end::Action-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Signin-->
+
+            </div>
+            <!--end::Content body-->
+        </div>
+        <!--end::Content-->
     </div>
     <!--end::Login-->
 </div>
+
 </body>
-
-<!-- end::Body -->
-
-<script>
-    //toggle show password icon
-    document.getElementById('show-password').addEventListener('click', function() {
-        var password = document.getElementById('password');
-        const hideEyeIcon = ['fa','fa-eye-slash'];
-        if (password.type === 'password') {
-            password.type = 'text';
-            this.classList.remove('flaticon-eye');
-            this.classList.add(...hideEyeIcon);
-        } else {
-            password.type = 'password';
-            this.classList.remove(...hideEyeIcon);
-            this.classList.add('flaticon-eye');
-        }
-    });
-</script>
+<!--end::Body-->
 </html>
-

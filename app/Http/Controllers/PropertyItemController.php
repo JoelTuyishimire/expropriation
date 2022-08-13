@@ -101,7 +101,11 @@ class PropertyItemController extends Controller
     }
     public function propertyItemsByPropertyType($propertyType)
     {
+        $init = collect([
+            'id'=>"",
+            'name'=>"--select item --"
+        ]);
         $propertyType = PropertyType::find($propertyType);
-        return $propertyType->propertyItems;
+        return $propertyType->propertyItems->prepend($init);
     }
 }

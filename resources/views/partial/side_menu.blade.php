@@ -79,30 +79,5 @@
         </li>
     @endcan
 
-    @canany(["Manage Branches","Manage Service Provider","Manage Services","Manage Charges"])
-    <li class="menu-item menu-item-submenu nav-user-managements" aria-haspopup="true" data-menu-toggle="hover">
-        <a href="javascript:;" class="menu-link menu-toggle">
-            <i class="menu-icon flaticon-settings"></i>
-            <span class="menu-text">Settings</span>
-            <i class="menu-arrow"></i>
-        </a>
-        <div class="menu-submenu">
-            <i class="menu-arrow"></i>
-            <ul class="menu-subnav">
-                @can('Manage Audit Log')
-                    <li class="menu-item nav-all-permissions" aria-haspopup="true">
-                        <a href="{{route('admin.system-audits.index')}}" class="menu-link">
-                            <i class="menu-bullet menu-bullet-dot">
-                                <span></span>
-                            </i>
-                            <span class="menu-text"> Audits</span>
-                        </a>
-                    </li>
-                @endcan
-            </ul>
-        </div>
-    </li>
-    @endcanany
-
 </ul>
 

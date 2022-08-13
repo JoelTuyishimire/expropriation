@@ -39,9 +39,6 @@ class UserDataTable extends DataTable
                     <span class="badge badge-info">'.$item->permissions()->count().'</span>
                 </a>';
             })
-            ->editColumn('branch_name', function ($item) {
-                return $item->branch->name??"-";
-            })
             ->editColumn('gender', function ($item) {
                 return '<span class="text-'.($item->gender == "Male"? "primary":"info").'">'.$item->gender.'</span>';
             })
@@ -90,14 +87,11 @@ class UserDataTable extends DataTable
                                        data-telephone="'.$item->telephone.'"
                                        data-gender="'.$item->gender.'"
                                        data-id="'.$item->id.'"
-                                       data-branch="'.$item->branch_id.'"
                                        data-national_id="'.$item->national_id.'"
                                        data-is_active="'.$item->is_active.'"
 
 
-                                       data-url="'.route("admin.users.update",$item->id).'"> Edit</a>'
-                                        . $reset_password .
-                                '</div>
+                                       data-url="'.route("admin.users.update",$item->id).'"> Edit</a></div>
                             </div>';
             })
             ->rawColumns(['action','permissions','status','national_id','photo','gender']);
@@ -159,10 +153,6 @@ class UserDataTable extends DataTable
             Column::make('telephone')
                 ->addClass('text-center'),
             Column::make('gender')
-                ->addClass('text-center'),
-            Column::make('branch_name')
-                ->title("Branch")
-                ->name("branch.name")
                 ->addClass('text-center'),
             Column::make('national_id')
                 ->name('national_id')
