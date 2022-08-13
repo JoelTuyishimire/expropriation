@@ -24,6 +24,21 @@
             <!--begin::Dashboard-->
             <div class="row">
                 <div class="col-md-3">
+                    <!--begin::Stats Widget 26-->
+                    <div class="card card-custom bg-primary card-stretch gutter-b">
+                        <!--begin::ody-->
+                        <div class="card-body">
+                            <i class="la fa-road fa-2x"></i>
+                            <!--end::Svg Icon-->
+                            </span>
+                            <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">{{expropriatedPropertyByType(2)->count}}</span>
+                            <span class="font-weight-bold font-size-sm text-white">Total {{expropriatedPropertyByType(2)->name}}</span>
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                    <!--end::Stats Widget 26-->
+                </div>
+                <div class="col-md-3">
                     <!--begin::Stats Widget 29-->
                     <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url({{asset('assets/media/svg/shapes/abstract-2.svg')}})">
                         <!--begin::Body-->
@@ -31,28 +46,12 @@
 												<i class="la la-house-damage fa-2x"></i>
                                                     <!--end::Svg Icon-->
 												</span>
-                            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">{{countBranches()}}</span>
-                            <span class="font-weight-bold font-size-sm">Total Houses</span>
+                            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">{{expropriatedPropertyByType(1)->count}}</span>
+                            <span class="font-weight-bold font-size-sm">Total {{expropriatedPropertyByType(1)->name}}</span>
                         </div>
                         <!--end::Body-->
                     </div>
                     <!--end::Stats Widget 29-->
-                </div>
-
-                <div class="col-md-3">
-                    <!--begin::Stats Widget 26-->
-                    <div class="card card-custom bg-primary card-stretch gutter-b">
-                        <!--begin::ody-->
-                        <div class="card-body">
-				                        <i class="la fa-road fa-2x"></i>
-                                                    <!--end::Svg Icon-->
-												</span>
-                            <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">{{countServiceProviders()}}</span>
-                            <span class="font-weight-bold font-size-sm text-white">Total Lands</span>
-                        </div>
-                        <!--end::Body-->
-                    </div>
-                    <!--end::Stats Widget 26-->
                 </div>
 
                 <div class="col-md-3">
@@ -65,8 +64,8 @@
 												 <i class="la la-tree fa-2x"></i>
                                                     <!--end::Svg Icon-->
 												</span>
-                            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">{{countServices()}}</span>
-                            <span class="font-weight-bold font-size-sm">Total Forests</span>
+                            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">{{expropriatedPropertyByType(3)->count}}</span>
+                            <span class="font-weight-bold font-size-sm">Total {{expropriatedPropertyByType(3)->name}}</span>
                         </div>
                         <!--end::Body-->
                     </div>
@@ -74,7 +73,7 @@
                 </div>
                 <div class="col-md-3">
                     <!--begin::Stats Widget 27-->
-                    <div class="card card-custom bg-success card-stretch gutter-b">
+                    <div class="card card-custom bg-warning card-stretch gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">
 												<span class="svg-icon svg-icon-2x svg-icon-white">
@@ -90,8 +89,8 @@
 													</svg>
                                                     <!--end::Svg Icon-->
 												</span>
-                            <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">{{countTransactions()}}</span>
-                            <span class="font-weight-bold font-size-sm text-white">Total Transactions</span>
+                            <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">{{number_format($totalTransactions)}}</span>
+                            <span class="font-weight-bold font-size-sm text-white">Total Transactions Amount</span>
                         </div>
                         <!--end::Body-->
                     </div>
@@ -100,17 +99,23 @@
             </div>
 
             <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <div class="card card-body rounded shadow-sm border-0 h-100">
+                        <h4> Expropriated Properties per Categories</h4>
+                        <div id="chart_12" class="d-flex justify-content-center"></div>
+                    </div>
+                </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="card-spacer bg-white card-rounded flex-grow-1 h-100">
                         <!--begin::Row-->
                         <div class="row m-0">
                             <div class="col px-3 py-2 ">
-                                <div class="font-size-sm text-muted font-weight-bold">Monthly Sales</div>
-                                <div class="font-weight-bolder" >RWF {{number_format(monthlyAmount())}}</div>
+                                <div class="font-size-sm text-muted font-weight-bold">Total Rejected</div>
+                                <div class="font-weight-bolder" >{{totalRejected()}}</div>
                             </div>
                             <div class="col px-3 py-2">
-                                <div class="font-size-sm text-muted font-weight-bold">Annual Sales</div>
-                                <div class="font-weight-bolder" >RWF {{number_format(annualAmount())}}</div>
+                                <div class="font-size-sm text-muted font-weight-bold">Total Approved</div>
+                                <div class="font-weight-bolder" >{{number_format(totalApproved())}}</div>
                             </div>
                         </div>
                         <!--end::Row-->
@@ -118,20 +123,33 @@
                         <div class="row">
                             <div class="col">
                                 <hr>
-                                <h4> Last Expropriations done</h4>
-                                <div id="charges-per-service"></div>
+                                <h4 class="mb-4"> Recent Expropriations</h4>
+                                <div class="flex-grow-1">
+
+                                    @foreach($latestExpropriation as $latest)
+                                        <!--begin::Item-->
+                                        <div class="d-flex align-items-center justify-content-between mb-10">
+                                            <div class="d-flex align-items-center mr-2">
+                                                <div>
+                                                    <a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">{{optional($latest->propertyType)->name}}</a>
+                                                    <div class="font-size-sm text-muted font-weight-bold mt-1">
+                                                        {{optional($latest->citizen)->name}}</div>
+                                                    <span class="text-muted font-weight-bold">{{getExpropriationItems($latest)}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="label label-light label-inline font-weight-bold text-dark-50 py-4 px-3 font-size-base">{{$latest->amount}} RWF</div>
+                                        </div>
+                                        <!--end::Item-->
+                                    @endforeach
+
+                                </div>
                             </div>
                         </div>
 
                         <!--end::Row-->
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-12">
-                    <div class="card card-body rounded shadow-sm border-0 h-100">
-                        <h4> Expropriated Properties per Categories</h4>
-                        <div id="charges-per-month"></div>
-                    </div>
-                </div>
+
             </div>
 
             <div class="row mt-10">
@@ -153,6 +171,13 @@
 @endsection
 @section("scripts")
     <script>
+        let data = @json($expropriatedPropertiesByCategory);
+        // Shared Colors Definition
+        const primary = '#6993FF';
+        const success = '#1BC5BD';
+        const info = '#8950FC';
+        const warning = '#FFA800';
+        const danger = '#F64E60';
         $('.nav-dashboard').addClass('menu-item-active');
 
         let pieData=@json(chargesPerService());
@@ -312,7 +337,35 @@
         $(function () {
             _demo13();
             _demo12();
+            _demo1();
         });
+
+        var _demo1 = function () {
+            const apexChart = "#chart_12";
+            var options = {
+                series: Object.values(data),
+                chart: {
+                    width: 380,
+                    type: 'pie',
+                },
+                labels: Object.keys(data),
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }],
+                colors: [primary, success, warning, danger, info]
+            };
+
+            var chart = new ApexCharts(document.querySelector(apexChart), options);
+            chart.render();
+        }
 
     </script>
 @stop

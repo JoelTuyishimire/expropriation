@@ -15,4 +15,8 @@ class PropertyType extends Model
     {
         return $this->hasMany(PropertyItem::class);
     }
+    public function expropriations()
+    {
+        return $this->hasMany(Expropriation::class);
+    }
 }

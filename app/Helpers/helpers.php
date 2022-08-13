@@ -66,10 +66,47 @@ function annualAmount($value="amount")
     $user=auth()->user();
     return 5;
 }
-function isNotBranch(): bool
+
+function totalTransations()
 {
-    $user=auth()->user();
-    return !$user->branch_id;
+    return \App\Models\Expropriation::query()
+        ->where('status', \App\Models\Expropriation::APPROVED)
+        ->sum("amount");
+}
+
+function totalRejected(): int
+{
+    return \App\Models\Expropriation::query()
+        ->where('status', \App\Models\Expropriation::REJECTED)
+        ->count();
+}
+
+function totalApproved(): int
+{
+    return \App\Models\Expropriation::query()
+        ->where('status', \App\Models\Expropriation::APPROVED)
+        ->count();
+}
+
+function getExpropriationItems(\App\Models\Expropriation $expropriation)
+{
+    $items = '';
+    foreach ($expropriation->details as $detail)
+    {
+        $items .= $detail->quantity ." ". optional($detail->item)->name . ", ";
+    }
+
+    return $items;
+}
+
+function expropriatedPropertyByType($propertyType = 1)
+{
+    $type = \App\Models\PropertyType::find($propertyType)->name_en;
+    $count= \App\Models\Expropriation::query()
+        ->where('status', "<>", \App\Models\Expropriation::PENDING)
+        ->where('property_type_id', $propertyType)
+        ->count();
+    return json_decode(json_encode(['name'=>str_plural($type), 'count'=>$count]));
 }
 
 function canReviewExpropriation(\App\Models\Expropriation $expropriation): bool

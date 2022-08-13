@@ -61,4 +61,9 @@ class Expropriation extends ExpropriationBaseModel
     {
         $this->attributes['total_price'] = $value * $this->attributes['quantity'];
     }
+
+    public function propertyItems()
+    {
+        return $this->hasManyThrough(PropertyItem::class, ExpropriationDetail::class);
+    }
 }
