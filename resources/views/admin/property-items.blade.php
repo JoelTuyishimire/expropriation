@@ -64,7 +64,7 @@
                             <td>Name</td>
                             <td>Measurement</td>
                             <td>Unit Price</td>
-                            <td>Location</td>
+{{--                            <td>Location</td>--}}
                             <td>Description</td>
                             <td>Action</td>
                         </tr>
@@ -78,7 +78,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->measurement }}</td>
                                 <td>{{ $item->price }}</td>
-                                <td>{{ $item->location }}</td>
+{{--                                <td>{{ $item->location }}</td>--}}
                                 <td>{{ $item->description }}</td>
                                     <td>
                                         <div class="btn-group">
@@ -159,10 +159,10 @@
                                             <label for="name">Unit price</label>
                                             <input name="price" type="text" id="price" class="form-control">
                                         </div>
-                                        <div class="col-md-6 form-group" >
-                                            <label for="name">Location</label>
-                                            <input name="location" type="text" id="location" class="form-control">
-                                        </div>
+{{--                                        <div class="col-md-6 form-group" >--}}
+{{--                                            <label for="name">Location</label>--}}
+{{--                                            <input name="location" type="text" id="location" class="form-control">--}}
+{{--                                        </div>--}}
                                         <div class="col-md-12 form-group" >
                                             <label for="name">Description</label>
                                             <textarea name="description" id="description" class="form-control"></textarea>
@@ -224,10 +224,10 @@
                                             <label for="name">Unit price</label>
                                             <input name="price" type="text" id="_price" class="form-control">
                                         </div>
-                                        <div class="col-md-6 form-group" >
-                                            <label for="name">Location</label>
-                                            <input name="location" type="text" id="_location" class="form-control">
-                                        </div>
+{{--                                        <div class="col-md-6 form-group" >--}}
+{{--                                            <label for="name">Location</label>--}}
+{{--                                            <input name="location" type="text" id="_location" class="form-control">--}}
+{{--                                        </div>--}}
                                         <div class="col-md-12 form-group" >
                                             <label for="name">Description</label>
                                             <textarea name="description" id="_description" class="form-control"></textarea>

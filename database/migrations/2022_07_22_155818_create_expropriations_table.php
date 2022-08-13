@@ -24,7 +24,7 @@ class CreateExpropriationsTable extends Migration
             $table->foreignId('district_id')->nullable()->constrained();
             $table->foreignId('sector_id')->nullable()->constrained();
             $table->foreignId('cell_id')->nullable()->constrained();
-            $table->string('status')->default('pending');
+            $table->string('status')->default('Pending');
             $table->string('review_decision')->nullable();
             $table->string('last_return')->nullable();
             $table->foreignId('approved_by')->nullable()->constrained('users');

@@ -76,7 +76,6 @@
                                 <td>{{ ++$key }}</td>
 
                                 <td>{{ optional($expopriation->citizen)->name }}</td>
-{{--                                <td>{{ optional($expopriation->citizen)->telephone }}</td>--}}
                                 <td>{{ optional($expopriation->propertyType)->name }}</td>
                                 <td>{{
                                         optional($expopriation->province)->name
@@ -86,8 +85,9 @@
                                 </td>
                                 <td>{{$expopriation->amount}}</td>
                                 <td>{{$expopriation->created_at}}</td>
-{{--                                <td>{{$expopriation->description}}</td>--}}
-                                <td>{{$expopriation->status}}</td>
+                                <td>
+                                    <span class="badge badge-{{$expopriation->status_color}}">{{$expopriation->status}}</span>
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-primary  dropdown-toggle btn-sm"
@@ -99,7 +99,7 @@
                                                 <i class="la la-file-contract"></i>
                                                 Details
                                             </a>
-                                            @if($expopriation->status == 'pending')
+                                            @if($expopriation->status == 'Pending')
                                                 <a class="dropdown-item btn-submit" href="{{route('admin.expropriations.submit',$expopriation->id)}}">
                                                     <i class="la la-eye"></i>
                                                     Submit for Review

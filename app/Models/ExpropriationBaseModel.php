@@ -9,8 +9,7 @@ class ExpropriationBaseModel extends Model
 {
     use HasFactory;
 
-    //application statuses
-    const DRAFT = "Draft";
+    // statuses
     const PENDING = "Pending";
     const SUBMITTED = "Submitted";
     const APPROVED = "Approved";
@@ -26,17 +25,18 @@ class ExpropriationBaseModel extends Model
         return [];
     }
     /**
-     * set color of application status
+     * set color of status
      */
     public function getStatusColorAttribute(): string
     {
-        if (in_array($this->status, [self::DRAFT,self::PENDING])) {
+
+        if ($this->status == self::PENDING) {
             $statusColor = "info";
-        } else if (in_array($this->status, [self::REJECTED])) {
+        } else if ($this->status == self::REJECTED) {
             $statusColor = "danger";
-        } if (in_array($this->status, [self::SUBMITTED])) {
+        } if ($this->status == self::SUBMITTED) {
             $statusColor = "primary";
-        }else{
+    } if ($this->status == self::APPROVED) {
             $statusColor = "success";
         }
         return $statusColor;

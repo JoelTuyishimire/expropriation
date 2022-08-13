@@ -19,7 +19,7 @@ class ExpropriationController extends Controller
      */
     public function index()
     {
-        $expropriations = Expropriation::all();
+        $expropriations = Expropriation::get();
         return view('expropriation.index', compact('expropriations'));
 
     }
