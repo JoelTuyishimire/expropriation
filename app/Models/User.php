@@ -65,8 +65,16 @@ class User extends Authenticatable implements Auditable
     public function histories(){
         return $this->hasMany(UserFlowHistory::class,'user_id');
     }
+    public function claims(){
+        return $this->hasMany(Claim::class,'citizen_id');
+    }
 
     public function doneBy(){
         return $this->belongsTo(User::class,'done_by','id');
+    }
+
+    public function isCitizen()
+    {
+        return $this->where('is_citizen',1);
     }
 }

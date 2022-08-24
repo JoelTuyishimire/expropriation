@@ -13,13 +13,13 @@
             </a>
         </li>
         <li class="menu-item nav-transactions" aria-haspopup="true">
-            <a href="{{ route('admin.property-types.index') }}" class="menu-link">
+            <a href="{{ route('admin.citizens.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Citizens</span>
             </a>
         </li>
         <li class="menu-item nav-transactions" aria-haspopup="true">
-            <a href="{{ route('admin.property-types.index') }}" class="menu-link">
+            <a href="{{ route('admin.claims.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Claims</span>
             </a>

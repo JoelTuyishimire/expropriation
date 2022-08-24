@@ -32,6 +32,14 @@ class UserController extends Controller
         return $dataTable->render('admin.user_management.users');
     }
 
+    public function citizens()
+    {
+        $data = User::where('is_citizen',true);
+        $data = $data->orderBy('updated_at', 'desc')->select("users.*")->get();
+        $dataTable = new UserDataTable($data);
+        return $dataTable->render('admin.user_management.citizens');
+    }
+
 
     public function store(ValidateUser $request)
     {

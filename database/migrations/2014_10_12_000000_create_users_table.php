@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('nid_attachment')->nullable();
             $table->string('photo')->nullable();
             $table->string('gender')->nullable();
+            $table->boolean('is_citizen')->default('false');
             $table->rememberToken();
             $table->timestamps();
         });

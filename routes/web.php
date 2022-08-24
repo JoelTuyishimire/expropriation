@@ -28,6 +28,9 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
         Route::get('/permissions/add-permission-to-user/{user_id}', [App\Http\Controllers\PermissionController::class, 'addPermissionToUser'])->name('user.add.permissions');
         Route::post('/permissions/add-permissions-to-user/store', [App\Http\Controllers\PermissionController::class, 'storePermissionToUser'])->name('permissions_to_user.store');
 
+        //citizen Routes
+        Route::get("/citizens", [App\Http\Controllers\UserController::class, 'citizens'])->name("citizens.index");
+
         //users routes
         Route::get("/users", [App\Http\Controllers\UserController::class, 'index'])->name("users.index");
         Route::post("/users/store", [App\Http\Controllers\UserController::class, 'store'])->name("users.store");
@@ -64,6 +67,10 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     Route::get('/expropriations/{expropriation}/submit', [App\Http\Controllers\ExpropriationController::class, 'submit'])->name('expropriations.submit');
     //review user request
     Route::post('{expropriation}/review', [App\Http\Controllers\ExpropriationController::class, 'review'])->name('expropriations.review');
+
+    //complaint Routes
+    Route::resource('claims', \App\Http\Controllers\ClaimController::class);
+    Route::get('/claims/{claim}/submit', [App\Http\Controllers\ClaimController::class, 'submit'])->name('claims.submit');
 
 });
 

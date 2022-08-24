@@ -19,7 +19,8 @@ class CreateClaimsTable extends Migration
             $table->foreignId('citizen_id')->constrained('users');
             $table->string('title');
             $table->string('description');
-            $table->string('status')->default('pending');
+            $table->string('status')->default('Pending');
+            $table->string('attachment')->nullable();
             $table->string('priority')->default('low');
             $table->foreignId('assignee')->nullable()->constrained('users');
             $table->timestamps();
