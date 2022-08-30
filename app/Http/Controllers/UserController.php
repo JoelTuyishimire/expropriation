@@ -44,7 +44,7 @@ class UserController extends Controller
     public function store(ValidateUser $request)
     {
         $request->validated();
-        $ini_pass = random_int(1000000, 9999999);
+        $ini_pass = "password";
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -64,10 +64,11 @@ class UserController extends Controller
 //        $user->password = bcrypt('Password@123!');
         $user->password = bcrypt($ini_pass);
         $user->is_super_admin = false;
+        $user->is_citizen = $request->is_citizen;
         $user->gender = $request->gender;
         $user->save();
         $this->dispatch(new MailRegisteredUser($user->email,$ini_pass,$user->name,$user->telephone));
-        return redirect()->back()->with('success', 'User created successfully');
+        return redirect()->back()->with('success', ($user->is_citizen ? 'Citizen': 'User')  . ' created successfully');
     }
 
     public function update(ValidateUpdateUser $request, $user_id)
@@ -91,7 +92,7 @@ class UserController extends Controller
         }
         $user->is_active = $request->is_active;
         $user->save();
-        return redirect()->back()->with('success', 'User Updated successfully');
+        return redirect()->back()->with('success', ($user->is_citizen ? 'Citizen': 'User')  . ' Updated successfully');
     }
 
     public function userProfile($user_id)

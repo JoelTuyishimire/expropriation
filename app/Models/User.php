@@ -70,9 +70,4 @@ class User extends Authenticatable
     public function doneBy(){
         return $this->belongsTo(User::class,'done_by','id');
     }
-
-    public function isCitizen()
-    {
-        return $this->where('is_citizen',1);
-    }
 }

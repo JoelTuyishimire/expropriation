@@ -7,6 +7,7 @@ use App\Models\Expropriation;
 use App\Models\ExpropriationDetail;
 use App\Models\ExpropriationHistory;
 use App\Models\PropertyItem;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +33,8 @@ class ExpropriationController extends Controller
     public function create()
     {
         return view('expropriation.create', [
-            'products' => PropertyItem::all()
+            'products' => PropertyItem::all(),
+            'citizens' =>User::query()->where('is_citizen',1)->get()
         ]);
     }
 

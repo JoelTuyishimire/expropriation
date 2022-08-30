@@ -116,7 +116,7 @@
 
                                         <select type="text" required id="citizen" class="form-control  client-select" name="citizen_id">
                                             <option value="">-- select --</option>
-                                          @foreach(\App\Models\User::all() ?? [] as $citizen)
+                                          @foreach($citizens ?? [] as $citizen)
                                                 <option value="{{$citizen->id}}">{{$citizen->name}}</option>
                                           @endforeach
                                         </select>

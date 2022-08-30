@@ -79,6 +79,7 @@
                         {{csrf_field()}}
                         <div class="modal-body">
                             <div class="row">
+                                <input type="hidden" name="is_citizen" value="1" >
                                 <div class="col-md-6 form-group">
                                     <label for="name" class="col-form-label">Photo</label>
                                     <div class="custom-file mb-2">
@@ -156,6 +157,7 @@
                           method="POST" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="modal-body">
+                            <input type="hidden" name="is_citizen" value="1" >
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label for="name" class="col-form-label">Photo</label>
