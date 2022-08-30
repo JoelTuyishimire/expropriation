@@ -13,12 +13,9 @@ class AddIsCitizenToUsersTable extends Migration
      */
     public function up()
     {
-       $exists = Schema::hasColumn('users', 'is_citizen');
-       if (!$exists){
            Schema::table('users', function (Blueprint $table) {
            $table->boolean('is_citizen')->default('false');
            });
-       }
     }
 
     /**
