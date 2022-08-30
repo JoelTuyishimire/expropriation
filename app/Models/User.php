@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -15,10 +14,9 @@ use Spatie\Permission\Traits\HasRoles;
  * @property mixed $branch_id
  * @property mixed $id
  */
-class User extends Authenticatable implements Auditable
+class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable,HasPermissions, HasRoles,
-        \OwenIt\Auditing\Auditable;
+    use HasApiTokens, HasFactory, Notifiable,HasPermissions, HasRoles;
 
     /**
      * The attributes that are mass assignable.

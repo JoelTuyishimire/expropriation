@@ -56,25 +56,26 @@ class LoginController extends Controller
 
         if (Auth::attempt($this->credentials($request))) {
             // check whether user has permission
-            $user = Auth::user();
-            if($user->is_active)
-            {
-                if($user->permissions()->count() >0 ||$user->is_super_admin)
-                {
-                    return $this->sendLoginResponse($request);
-                }
-                else
-                {
-                    $this->guard()->logout();
-                    return redirect()->back()->with("error", "No permission assigned to your account!  Please Contact Administrator.");
-                }
-
-            }
-            else
-            {
-                $this->guard()->logout();
-                return redirect()->back()->with("error", "Your account is in-active!  Please Contact Administrator.");
-            }
+            return $this->sendLoginResponse($request);
+//            $user = Auth::user();
+//            if($user->is_active)
+//            {
+//                if($user->permissions()->count() >0 ||$user->is_super_admin)
+//                {
+//                    return $this->sendLoginResponse($request);
+//                }
+//                else
+//                {
+//                    $this->guard()->logout();
+//                    return redirect()->back()->with("error", "No permission assigned to your account!  Please Contact Administrator.");
+//                }
+//
+//            }
+//            else
+//            {
+//                $this->guard()->logout();
+//                return redirect()->back()->with("error", "Your account is in-active!  Please Contact Administrator.");
+//            }
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
