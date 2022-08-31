@@ -96,11 +96,33 @@
                                                 data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">Actions</button>
                                         <div class="dropdown-menu" style="">
-                                            <a class="dropdown-item"
-                                               href="{{route('admin.claims.show',$claim->id)}}">
-                                                <i class="la la-file-contract"></i>
-                                                Details
-                                            </a>
+                                            @if($claim->comment == null)
+                                                @if(auth()->user()->is_citizen)
+                                                    <a class="dropdown-item"
+                                                       href="#">
+                                                        Not yet Reviewed
+                                                    </a>
+                                                @else
+                                                    <a class="dropdown-item btn-review"
+                                                       data-toggle="modal"
+                                                       data-target="#claimModal"
+                                                       href="{{route('admin.claims.review',$claim->id)}}">
+                                                        <i class="la la-file-contract"></i>
+                                                        Review this claim
+                                                    </a>
+                                                @endif
+                                            @else
+                                                <a class="dropdown-item btn-claim-review"
+                                                   data-content="{{$claim->comment}}"
+                                                   data-toggle="modal"
+                                                   data-target="#reviewModal"
+                                                   href="#">
+                                                    <i class="la la-file-contract"></i>
+                                                    Review
+                                                </a>
+                                            @endif
+
+
                                             @if($claim->status == 'Pending')
                                                 <a class="dropdown-item btn-submit" href="{{route('admin.claims.submit',$claim->id)}}">
                                                     <i class="la la-eye"></i>
@@ -120,6 +142,7 @@
                         </tbody>
                     </table>
                 </div>
+
 
 
                 <div class="modal fade " id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -164,7 +187,7 @@
                                         </div>
                                         <div class="col-md-12 form-group" >
                                             <label for="name">Description</label>
-                                            <textarea name="description" id="description" class="form-control" rows="10"></textarea>
+                                            <textarea name="description" id="description" class="form-control" rows="5"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -213,140 +236,66 @@
                     @method('DELETE')
                 </form>
 
-            </div>
-            <div class="modal fade " id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Property item</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <form action="{{route("admin.property-items.store")}}" method="POST" id="add-property-items-form">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name">Name</label>
-                                        <input name="name" type="text" id="name" class="form-control">
+                <div class="modal fade " id="claimModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Make Review</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <form action="" method="POST" id="review-form">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="form-group" >
+                                        <label for="add-name">Comment</label>
+                                        <textarea required name="comment" id="comment" class="form-control"></textarea>
                                     </div>
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name_en">Name en</label>
-                                        <input name="name_en" type="text" id="name_en" class="form-control">
-                                    </div>
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name">Property Type</label>
-                                        <select name="property_type_id" id="property_type_id" class="form-control">
-                                            <option value="">Select Property Type</option>
-                                            @foreach($propertyTypes ?? [] as $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name">measurement unit</label>
-                                        <select name="measurement" id="measurement_id" class="form-control">
-                                            <option value="">Select measurement unit</option>
-                                            @foreach($measurementUnits ?? ["KG","PIECES", "NUMBER"] as $item)
-                                                {{--                                                <option value="{{$item->id}}">{{$item->name}}</option>--}}
-                                                <option value="{{$item}}">{{$item}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name">Unit price</label>
-                                        <input name="price" type="text" id="price" class="form-control">
-                                    </div>
-                                    {{--                                        <div class="col-md-6 form-group" >--}}
-                                    {{--                                            <label for="name">Location</label>--}}
-                                    {{--                                            <input name="location" type="text" id="location" class="form-control">--}}
-                                    {{--                                        </div>--}}
-                                    <div class="col-md-12 form-group" >
-                                        <label for="name">Description</label>
-                                        <textarea name="description" id="description" class="form-control"></textarea>
-                                    </div>
-                                </div>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary"><span class="fa fa-check-circle-o"></span> Confirm</button>
-                            </div>
-                        </form>
+                                    <div class="form-group" >
+                                        <label for="status">Status</label>
+                                        <select required name="status" class="form-control" id="status">
+                                            <option value="">--Select--</option>
+                                            <option value="Closed">Closed</option>
+                                            <option value="Completed">Completed</option>
+                                            <option value="Rejected">Rejected</option>
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary"><span class="fa fa-check-circle-o"></span> Confirm</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="modal fade " id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Property item</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <form action="" method="POST" id="edit-property-items-form">
-                            @csrf
-                            @method('PUT')
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name">Name</label>
-                                        <input name="name" type="text" id="_name" class="form-control">
-                                    </div>
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name_en">Name en</label>
-                                        <input name="name_en" type="text" id="_name_en" class="form-control">
-                                    </div>
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name">Property Type</label>
-                                        <select name="property_type_id" id="_property_type_id" class="form-control">
-                                            <option value="">Select Property Type</option>
-                                            @foreach($propertyTypes ?? [] as $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name">measurement unit</label>
-                                        <select name="measurement" id="_measurement" class="form-control">
-                                            <option value="">Select measurement unit</option>
-                                            @foreach($measurementUnits ?? ["KG","PIECES", "NUMBER"] as $item)
-                                                {{--                                                <option value="{{$item->id}}">{{$item->name}}</option>--}}
-                                                <option value="{{$item}}">{{$item}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 form-group" >
-                                        <label for="name">Unit price</label>
-                                        <input name="price" type="text" id="_price" class="form-control">
-                                    </div>
-                                    {{--                                        <div class="col-md-6 form-group" >--}}
-                                    {{--                                            <label for="name">Location</label>--}}
-                                    {{--                                            <input name="location" type="text" id="_location" class="form-control">--}}
-                                    {{--                                        </div>--}}
-                                    <div class="col-md-12 form-group" >
-                                        <label for="name">Description</label>
-                                        <textarea name="description" id="_description" class="form-control"></textarea>
-                                    </div>
+                <div class="modal fade " id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Claim Review</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <form action="" method="POST" id="review-form">
+                                @csrf
+                                <div class="modal-body">
+                                        <div id="review-content" class="mb-5"></div>
                                 </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary"><span class="fa fa-check-circle-o"></span> Confirm</button>
-                            </div>
-                        </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <form method="post" id="delete-property-items-form">
-                @csrf
-                @method('DELETE')
-            </form>
+            </div>
         </div>
     </div>
 
@@ -366,6 +315,7 @@
             responsive: true
         });
 
+
         $(document).on('click','.btn-edit',function(e) {
             e.preventDefault();
             $('#_name').val($(this).data('name'));
@@ -374,6 +324,15 @@
             $('#edit-property-types-form').attr("action", $(this).data('url'));
         });
 
+        $(document).on('click','.btn-review',function(e) {
+            e.preventDefault();
+            $('#review-form').attr("action", $(this).attr('href'));
+        });
+        $(document).on('click','.btn-claim-review',function(e) {
+            e.preventDefault();
+            let content = $(this).data("content");
+            $("#review-content").html(content)
+        });
         $(document).on('click', '.btn-delete', function (e) {
             e.preventDefault();
             var url = $(this).data('url');

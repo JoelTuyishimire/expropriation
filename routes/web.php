@@ -71,6 +71,7 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     //complaint Routes
     Route::resource('claims', \App\Http\Controllers\ClaimController::class);
     Route::get('/claims/{claim}/submit', [App\Http\Controllers\ClaimController::class, 'submit'])->name('claims.submit');
+    Route::post('/claims/{claim}/review', [App\Http\Controllers\ClaimController::class, 'review'])->name('claims.review');
 
 });
 

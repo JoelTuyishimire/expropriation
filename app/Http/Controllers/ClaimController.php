@@ -105,4 +105,12 @@ class ClaimController extends Controller
         ]);
         return redirect()->route('admin.claims.index')->with('success', 'Claim submitted successfully');
     }
+    public function review(Request $request,Claim $claim)
+    {
+        $claim->update([
+            'status' => $request->status,
+            'comment' => $request->comment
+        ]);
+        return redirect()->route('admin.claims.index')->with('success', 'Claim reviewed successfully');
+    }
 }

@@ -34,10 +34,13 @@ class ExpropriationBaseModel extends Model
             $statusColor = "info";
         } else if ($this->status == self::REJECTED) {
             $statusColor = "danger";
-        } if ($this->status == self::SUBMITTED) {
+        }else if ($this->status == self::SUBMITTED) {
             $statusColor = "primary";
-    } if ($this->status == self::APPROVED) {
+    }else if ($this->status == self::APPROVED) {
             $statusColor = "success";
+        }
+        else{
+            $statusColor = "secondary";
         }
         return $statusColor;
     }
