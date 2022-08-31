@@ -26,7 +26,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $data = User::with(["permissions"]);
+        $data = User::with(["permissions"])->where('is_citizen', '=', false);
         $data = $data->orderBy('updated_at', 'desc')->select("users.*")->get();
         $dataTable = new UserDataTable($data);
         return $dataTable->render('admin.user_management.users');

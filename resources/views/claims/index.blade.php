@@ -42,12 +42,14 @@
                             List of Claims
                         </h3>
                     </div>
-                    <div class="card-toolbar">
-                        <a href="javascript:void(0)" data-toggle="modal" data-target="#addModal" class="btn btn-primary">
-                            <i class="la la-plus"></i>
-                            New Claim
-                        </a>
-                    </div>
+                    @if(auth()->user()->is_citizen)
+                        <div class="card-toolbar">
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#addModal" class="btn btn-primary">
+                                <i class="la la-plus"></i>
+                                New Claim
+                            </a>
+                        </div>
+                    @endif
                     <!--end::Dropdown-->
 
 

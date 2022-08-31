@@ -20,7 +20,12 @@ class ExpropriationController extends Controller
      */
     public function index()
     {
-        $expropriations = Expropriation::get();
+        $user = auth()->user();
+        if ($user->is_citizen){
+            $expropriations = Expropriation::where('citizen_id', $user->id)->get();
+        }else{
+            $expropriations = Expropriation::get();
+        }
         return view('expropriation.index', compact('expropriations'));
 
     }

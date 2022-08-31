@@ -29,8 +29,8 @@ class PermissionController extends Controller
     public function addPermissionToUser($user_id)
     {
         $user = User::find(decryptId($user_id));
-        if (auth()->user()->branch_id) {
-            $permissions = Permission::whereIn('type', ['both','branch'])->get();
+        if ($user->is_citizen) {
+            $permissions = Permission::whereIn('type', ['both','citizen'])->get();
         }else{
             $permissions = Permission::all();
         }

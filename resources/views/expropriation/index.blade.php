@@ -42,12 +42,14 @@
                             List of Expropriations
                         </h3>
                     </div>
+                    @can('Create Expropriations')
                         <div class="card-toolbar">
                             <a href="{{route('admin.expropriations.create')}}" class="btn btn-primary">
                                 <i class="la la-plus"></i>
                                 New Expropriation
                             </a>
                         </div>
+                    @endcan
                     <!--end::Dropdown-->
 
 

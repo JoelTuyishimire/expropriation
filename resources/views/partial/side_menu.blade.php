@@ -5,14 +5,14 @@
             <span class="menu-text">Dashboard</span>
         </a>
     </li>
-    @can('Manage Expropriations')
+    @canany(['Manage Expropriations','View Expropriations'])
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.expropriations.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Expropriations</span>
             </a>
         </li>
-    @endcan
+    @endcanany
     @can("Manage Citizens")
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.citizens.index') }}" class="menu-link">
@@ -21,14 +21,14 @@
             </a>
         </li>
     @endcan
-    @can('Manage Claims')
+    @canany(["Manage Claims",'Make Claims'])
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.claims.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Claims</span>
             </a>
         </li>
-    @endcan
+    @endcanany
     @can('Manage Property Types')
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.property-types.index') }}" class="menu-link">

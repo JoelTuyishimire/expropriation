@@ -112,7 +112,7 @@ function expropriatedPropertyByType($propertyType = 1)
 function canReviewExpropriation(\App\Models\Expropriation $expropriation): bool
 {
     $user = auth()->user();
-    if (in_array($expropriation->status, [\App\Models\Expropriation::SUBMITTED]) && $user->can('Approve Expropriation')) {
+    if (in_array($expropriation->status, [\App\Models\Expropriation::SUBMITTED]) && $user->can('Approve Expropriations')) {
         return true;
     }
     return false;

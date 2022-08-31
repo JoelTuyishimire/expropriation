@@ -122,9 +122,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <a href="#" class="btn btn-success  btn-add"><span class="fa fa-plus"></span></a>
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-3">
