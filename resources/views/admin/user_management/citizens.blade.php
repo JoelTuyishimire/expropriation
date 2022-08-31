@@ -48,7 +48,7 @@
                    data-toggle="modal"
                    data-target="#addModal" >
                     <i class="la la-plus"></i>
-                    New User
+                    New Citizen
                 </a>
             </div>
             <!--end::Dropdown-->
@@ -70,7 +70,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add new User</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add new citizen</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
@@ -135,7 +135,7 @@
                                     class="la la-close"></span> Close
                             </button>
                             <button type="submit" class="btn btn-primary"><span class="la la-check-circle-o"></span>
-                                Save User
+                                Save
                             </button>
                         </div>
                     </form>
@@ -149,7 +149,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Citizen</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         </button>
                     </div>

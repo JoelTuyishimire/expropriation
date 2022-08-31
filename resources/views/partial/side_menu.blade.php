@@ -5,40 +5,48 @@
             <span class="menu-text">Dashboard</span>
         </a>
     </li>
-    @can('Create Transaction')
+    @can('Manage Expropriations')
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.expropriations.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Expropriations</span>
             </a>
         </li>
+    @endcan
+    @can("Manage Citizens")
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.citizens.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Citizens</span>
             </a>
         </li>
+    @endcan
+    @can('Manage Claims')
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.claims.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Claims</span>
             </a>
         </li>
+    @endcan
+    @can('Manage Property Types')
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.property-types.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Property Types</span>
             </a>
         </li>
+    @endcan
+    @can('Manage Property Items')
+
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.property-items.index') }}" class="menu-link">
                 <i class="menu-icon flaticon-cart"></i>
                 <span class="menu-text">Property Items</span>
             </a>
         </li>
+
     @endcan
-
-
     @can('Manage System Users')
         <li class="menu-section">
             <h4 class="menu-text">System Users Section</h4>
