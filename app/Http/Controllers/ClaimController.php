@@ -18,8 +18,14 @@ class ClaimController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+        if (!$user->is_citizen) {
+            $claims = Claim::all();
+        } else {
+            $claims = Claim::where('citizen_id', $user->id)->get();
+        }
         return view('claims.index',[
-           'claims'=>Claim::all(),
+           'claims'=>$claims,
             'expropriations' => Expropriation::query()
                 ->where('status', Expropriation::APPROVED)
                 ->where('citizen_id', auth()->user()->id)->get()
