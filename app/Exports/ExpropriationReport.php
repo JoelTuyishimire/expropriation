@@ -12,41 +12,37 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class TransactionExport implements FromCollection,WithTitle,WithHeadings,WithEvents,ShouldAutoSize
+class ExpropriationReport implements FromCollection,WithTitle,WithHeadings,WithEvents,ShouldAutoSize
 {
+
     use Exportable;
 
     protected $query;
 
-    public function __construct($query,$title="Transactions")
+    public function __construct($query,$title="Expropriation Report")
     {
         $this->query = $query;
         $this->title = $title;
     }
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         //
         $agents=$this->query->get();
-
         return $agents->map(
             function ($item) {
                 $row=array();
-                $row[] =optional($item->branch)->name??'-';
-                $row[] = $item->customer_name;
-                $row[] = $item->customer_phone;
-                $row[] =optional($item->serviceCharges)->serviceProvider->name??'-';
-                $row[] = optional($item->serviceCharges)->service->name??'-';
-                $row[] = $item->reference_number;
-                $row[] = number_format($item->amount);
-                $row[] = number_format($item->total_charges);
-                $row[] = $item->charges_type;
-                $row[] = $item->charges_type=="Percentage"?$item->charges."%":number_format($item->charges);
-                $row[] = $item->branch->name??'-';
-                $row[]= optional($item->created_at)->format('Y-m-d h:m:s');
+                $row[]=optional($item->citizen)->name;
+                $row[]=optional($item->propertyType)->name;
+                $row[]=optional($item->province)->name;
+                $row[]= optional($item->district)->name;
+                $row[]= optional($item->sector)->name;
+                $row[]=$item->amount . " RWF";
                 $row[]=$item->status;
+                $row[]=$item->created_at;
+                $row[]=optional($item->doneBy)->name;
                 return $row;
             }
         );
@@ -62,19 +58,15 @@ class TransactionExport implements FromCollection,WithTitle,WithHeadings,WithEve
     public function headings(): array
     {
         return [
-            'Branch Name',
-            'Customer Name',
-            'Customer Telephone ',
-            'Service Provider',
-            'Service',
-            'Reference Number',
-            'Amount',
-            'Total Charges',
-            'Charge type',
-            'Charge',
-            'Branch',
-            'Status',
-            'Created At',
+                'Citizen Name',
+                'Property Type',
+                'Province',
+                'District',
+                'Sector',
+                'Property Price',
+                'Expropriation Status',
+                'Expropriation Date',
+                'Done By',
         ];
     }
 
@@ -82,7 +74,7 @@ class TransactionExport implements FromCollection,WithTitle,WithHeadings,WithEve
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $last_column = Coordinate::stringFromColumnIndex(13);
+                $last_column = Coordinate::stringFromColumnIndex(9);
                 $style_text_center = [
                     'alignment' => [
                         'horizontal' => Alignment::HORIZONTAL_CENTER
@@ -105,6 +97,4 @@ class TransactionExport implements FromCollection,WithTitle,WithHeadings,WithEve
             },
         ];
     }
-
-
 }

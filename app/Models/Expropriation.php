@@ -42,11 +42,6 @@ class Expropriation extends ExpropriationBaseModel
         return $this->belongsTo(Sector::class);
     }
 
-    public function cell()
-    {
-        return $this->belongsTo(Cell::class);
-    }
-
     public function histories()
     {
         return $this->hasMany(ExpropriationHistory::class, 'expropriation_id');
@@ -65,5 +60,9 @@ class Expropriation extends ExpropriationBaseModel
     public function propertyItems()
     {
         return $this->hasManyThrough(PropertyItem::class, ExpropriationDetail::class);
+    }
+    public function doneBy()
+    {
+        return $this->belongsTo(User::class, 'done_by');
     }
 }

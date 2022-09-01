@@ -73,6 +73,8 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     Route::get('/claims/{claim}/submit', [App\Http\Controllers\ClaimController::class, 'submit'])->name('claims.submit');
     Route::post('/claims/{claim}/review', [App\Http\Controllers\ClaimController::class, 'review'])->name('claims.review');
 
+//transactions report
+    Route::get('/report/expropriations', [\App\Http\Controllers\ReportController::class, 'expropriations'])->name('expropriations.report');
 });
 
 //ajax requests
@@ -80,6 +82,10 @@ Route::get('districts/{province}', [\App\Http\Controllers\LocalityController::cl
 Route::get('sectors/{district}', [\App\Http\Controllers\LocalityController::class,'sectorsByDistrict']);
 Route::get('cells/{sector}', [\App\Http\Controllers\LocalityController::class,'cellsBySector']);
 //get property items by property type
-    Route::get('property-items/{property_type}', [\App\Http\Controllers\PropertyItemController::class,'propertyItemsByPropertyType'])->name('property-items.by.property.type');
+Route::get('property-items/{property_type}', [\App\Http\Controllers\PropertyItemController::class,'propertyItemsByPropertyType'])->name('property-items.by.property.type');
+
+Route::post('/multiple-districts', [\App\Http\Controllers\DataController::class, 'getMultipleDistricts'])->name("getMultipleDistricts");
+Route::post('/multiple-sectors', [\App\Http\Controllers\DataController::class, 'getMultipleSectors'])->name("getMultipleSectors");
+Route::post('/multiple-cells', [\App\Http\Controllers\DataController::class, 'getMultipleCells'])->name("getMultipleCells");
 
 Auth::routes();
