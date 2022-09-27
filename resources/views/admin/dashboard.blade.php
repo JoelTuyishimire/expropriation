@@ -100,7 +100,7 @@
 
             <div class="row">
                 <div class="col-md-8 col-sm-12">
-                    <div class="card card-body rounded shadow-sm border-0 h-100">
+                    <div c  lass="card card-body rounded shadow-sm border-0 h-100">
                         <h4> Expropriated Properties per Categories</h4>
                         <div id="chart_12" class="d-flex justify-content-center"></div>
                     </div>
