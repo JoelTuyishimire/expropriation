@@ -1,10 +1,12 @@
 <ul class="menu-nav">
-    <li class="menu-item nav-dashboard" aria-haspopup="true">
-        <a href="/" class="menu-link">
-            <i class="menu-icon flaticon-dashboard"></i>
-            <span class="menu-text">Dashboard</span>
-        </a>
-    </li>
+    @if (!auth()->user()->is_citizen)
+        <li class="menu-item nav-dashboard" aria-haspopup="true">
+            <a href="/" class="menu-link">
+                <i class="menu-icon flaticon-dashboard"></i>
+                <span class="menu-text">Dashboard</span>
+            </a>
+        </li>
+    @endif
     @canany(['Manage Expropriations','View Expropriations'])
         <li class="menu-item nav-transactions" aria-haspopup="true">
             <a href="{{ route('admin.expropriations.index') }}" class="menu-link">

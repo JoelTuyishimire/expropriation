@@ -168,6 +168,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="upi">UPI</label>
+                                    <input type="text "required name="upi" class="form-control">
+                                </div>
+                            </div>
 {{--                        </div>--}}
                     </div>
 

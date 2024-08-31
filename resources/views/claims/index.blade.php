@@ -257,8 +257,7 @@
                                         <label for="status">Status</label>
                                         <select required name="status" class="form-control" id="status">
                                             <option value="">--Select--</option>
-                                            <option value="Closed">Closed</option>
-                                            <option value="Completed">Completed</option>
+                                            <option value="Accepted">Accepted</option>
                                             <option value="Rejected">Rejected</option>
                                         </select>
                                     </div>

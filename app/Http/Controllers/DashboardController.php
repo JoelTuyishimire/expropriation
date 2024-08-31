@@ -11,6 +11,9 @@ class DashboardController extends Controller
     //
 
     public function index(){
+        if(auth()->user()->is_citizen){
+            return redirect()->route('admin.expropriations.index');
+        }
         return view("admin.dashboard", [
             'totalTransactions'=>$this->totalTransactions(),
             'latestExpropriation' => Expropriation::with('propertyType')->latest()->take(5)->get(),

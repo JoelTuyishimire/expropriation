@@ -53,7 +53,7 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
 
     });
     //system audits routes
-    Route::get("/system-audits", [App\Http\Controllers\SystemAuditController::class, 'index'])->name("system-audits.index");
+    // Route::get("/system-audits", [App\Http\Controllers\SystemAuditController::class, 'index'])->name("system-audits.index");
 
     //Property Types routes
     Route::resource('property-types', \App\Http\Controllers\PropertyTypeController::class);

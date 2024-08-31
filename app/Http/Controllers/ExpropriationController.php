@@ -60,6 +60,7 @@ class ExpropriationController extends Controller
             'province_id' => $request->province_id,
             'district_id' => $request->district_id,
             'sector_id' => $request->sector_id,
+            'upi' => $request->upi
         ]);
 
         foreach ($request->product_id as $key => $product) {

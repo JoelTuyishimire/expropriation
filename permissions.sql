@@ -1,0 +1,11 @@
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (4, 'Manage Property Types', 'web', '2024-08-31 22:54:16', '2024-08-31 22:54:22', 'admin');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (5, 'Manage Property Items', 'web', '2024-08-31 22:54:19', '2024-08-31 22:54:23', 'admin');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (6, 'Manage System Users', 'web', '2024-08-31 22:54:20', '2024-08-31 22:54:24', 'admin');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (1, 'Manage Expropriations', 'web', '2024-08-31 22:53:33', '2024-08-31 22:53:36', 'admin');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (2, 'Manage Citizens', 'web', '2024-08-31 22:54:13', '2024-08-31 22:54:21', 'admin');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (7, 'View Expropriations', 'web', '2024-08-31 23:06:39', '2024-08-31 23:06:40', 'citizen');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (9, 'Approve Expropriations', 'web', '2024-08-31 23:33:22', '2024-08-31 23:33:23', 'admin');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (10, 'Create Expropriations', 'web', '2024-08-31 23:37:26', '2024-08-31 23:37:28', 'admin');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (3, 'Manage Claims', 'web', '2024-08-31 22:54:17', '2024-08-31 22:54:21', 'admin');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (11, 'Make Claims', 'web', '2024-08-31 23:46:28', '2024-08-31 23:46:30', 'citizen');
+INSERT INTO public.permissions (id, name, guard_name, created_at, updated_at, type) VALUES (12, 'View Reports', 'web', '2022-09-01 17:28:20', '2022-09-01 17:28:23', 'admin');

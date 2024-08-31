@@ -17,7 +17,8 @@ class PropertyItemController extends Controller
     {
         return view('admin.property-items', [
             'propertyItems' => PropertyItem::all(),
-            'propertyTypes' => PropertyType::all()
+            'propertyTypes' => PropertyType::all(),
+            'measurementUnits' =>["KG","PIECES", "NUMBER","M²"]
         ]);
     }
 
