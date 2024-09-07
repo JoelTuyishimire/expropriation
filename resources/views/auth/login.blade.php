@@ -17,7 +17,7 @@
     <!--end::Global Theme Styles-->
     <!--begin::Layout Themes(used by all pages)-->
     <!--end::Layout Themes-->
-    <link rel="shortcut icon" href="{{asset('img/logo.png')}}" />
+    <link rel="shortcut icon" href="{{asset('img/reglogo.png')}}" />
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -32,7 +32,7 @@
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                 <!--begin::Aside header-->
                 <a href="#" class="text-center mb-10">
-                    <img src="{{asset('img/logo.png')}}" class="max-h-70px" alt="" />
+                    <img src="{{asset('img/reglogo.png')}}" class="max-h-70px" alt="" />
                 </a>
                 <!--end::Aside header-->
                 <!--begin::Aside title-->
@@ -42,7 +42,7 @@
             </div>
             <!--end::Aside Top-->
             <!--begin::Aside Bottom-->
-            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{asset("img/splash.svg")}})"></div>
+            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-top bgi-position-x-center" style="background-image: url({{asset("img/homepage.png")}})"></div>
             <!--end::Aside Bottom-->
         </div>
         <!--begin::Aside-->
