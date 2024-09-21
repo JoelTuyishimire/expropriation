@@ -49,12 +49,12 @@ class UserDataTable extends DataTable
             ->editColumn('status', function ($item) {
                 if($item->is_active){
                     return '
-                <a href="'.route('admin.users.flow.history', encryptId($item->id)).'" data-toggle="tooltip" data-placement="top" title="Click for more">
+                <a href="#" data-toggle="tooltip">
                     <span class="badge badge-success">Active</span>
                 </a>';
                 }else{
                     return '
-                 <a href="'.route('admin.users.flow.history', encryptId($item->id)).'" data-toggle="tooltip" data-placement="top" title="Click for more">
+                 <a href="#" data-toggle="tooltip">
                  <span class="badge badge-danger">Inactive</span>
                  </a>';
                 }

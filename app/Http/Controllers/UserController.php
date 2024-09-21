@@ -138,7 +138,7 @@ class UserController extends Controller
         $action = $user->is_active ? 'Deactivate' : 'Activate';
         $user->is_active = !$user->is_active;
         $user->save();
-        $this->saveFlowHistory($user,\request('reason'), $action);
+        // $this->saveFlowHistory($user,\request('reason'), $action);
         return redirect()->back()->with('success', "{$user->email} {$action}d successfully");
     }
 

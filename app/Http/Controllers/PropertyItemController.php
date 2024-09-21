@@ -61,8 +61,8 @@ class PropertyItemController extends Controller
             'name_en' => $item->name_en,
             'property_type_id' => $item->property_type_id,
             'property_item_id' => $item->id,
-            'measurement' => $item->measurement,
-            'price' => $item->price,
+            'measurement_unit' => $item->measurement,
+            'unit_price' => $item->price,
             'location' => $item->location,
             'updated_by' => auth()->user()->id
         ]);

@@ -40,7 +40,7 @@ class MailRegisteredUser implements ShouldQueue
     {
         //
         if ($this->attempts() < 5) {
-//            $this->sendEmail();
+           $this->sendEmail();
             $this->sendSMS();
         }
     }

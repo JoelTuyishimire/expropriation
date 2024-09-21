@@ -184,7 +184,7 @@
                             <tr>
                                 <th>#</th>
                                 <th style="width: 20%;">Property Item</th>
-                                <th>Quantity(Kg/Pieces)</th>
+                                <th>Quantity(Kg/Pieces/m²)</th>
                                 <th>Unit Price(RWF)</th>
                                 <th>Total</th>
                                 <th>Action</th>

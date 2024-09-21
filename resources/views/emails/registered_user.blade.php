@@ -1,7 +1,7 @@
 @component('mail::message', ['data' =>$data])
 # Hello,
 <h3>{{$data['name']}}</h3>
-<p>Welcome to IPOSITA</p>
+<p>Welcome to REG Expropriation System</p>
 
 Your Password is <span style="color: blue">{{$data['password']}}</span>
 <p>please follow the link below to login</p>

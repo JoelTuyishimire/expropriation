@@ -52,6 +52,11 @@
             <div class="d-flex flex-column-fluid flex-center">
                 <!--begin::Signin-->
                 <div class="login-form login-signin">
+                    @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                     <!--begin::Form-->
                     <form class="form" action="{{ route('login') }}" method="post">
                         @csrf
